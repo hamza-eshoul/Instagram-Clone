@@ -1,12 +1,23 @@
 import React from "react";
 
-const Icon = ({ icon, iconText }) => {
+const Icon = ({ icon, iconText, isSearchActive }) => {
   return (
-    <div className="transition-duration-300 group flex cursor-pointer items-center gap-4 p-3 transition  ease-in-out hover:rounded-2xl hover:bg-[#FAFAFA]">
+    <div
+      className={`${
+        isSearchActive ? "hover:bg-transparent dark:hover:bg-transparent" : ""
+      } transition-duration-300 group flex cursor-pointer items-center gap-4 p-3 transition  ease-in-out hover:rounded-2xl hover:bg-[#FAFAFA] dark:hover:bg-lightDark`}
+    >
       <i className="text-[14px] group-hover:scale-[1.05] group-hover:fill-black">
         {icon}
       </i>
-      <p className="text-[16px] group-active:font-bold"> {iconText} </p>
+      <p
+        className={`${
+          isSearchActive ? "hidden" : ""
+        } text-[16px] group-active:font-bold`}
+      >
+        {" "}
+        {iconText}{" "}
+      </p>
     </div>
   );
 };

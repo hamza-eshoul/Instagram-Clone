@@ -13,3 +13,9 @@
 .featureImage {
   animation: fadeIn 5s infinite;
 }
+
+@layer components {
+  .cardItemsHover {
+    @apply cursor-pointer hover:opacity-50;
+  }
+}

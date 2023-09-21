@@ -3,7 +3,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 
 const Footer = () => {
   return (
-    <div className="flex w-screen flex-col items-center gap-5 ">
+    <div className="mb-7 flex w-screen flex-col items-center gap-5">
       {/* Links */}
       <div className="flex gap-4">
         <a
