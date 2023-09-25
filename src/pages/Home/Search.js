@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { db } from "../../Firebase";
+import { db } from "../../firebase/config";
 import { collection, getDocs } from "firebase/firestore";
 import SearchQuery from "./SearchQuery";
 import { v4 as uuidv4 } from "uuid";

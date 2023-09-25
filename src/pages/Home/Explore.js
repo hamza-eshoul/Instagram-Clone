@@ -1,6 +1,6 @@
 import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { db } from "../../Firebase";
+import { db } from "../../firebase/config";
 import PostCard from "../Profile/PostCard";
 import { Link } from "react-router-dom";
 import { MoonLoader } from "react-spinners";

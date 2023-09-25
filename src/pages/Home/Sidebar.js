@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useLogout } from "../../hooks/useLogout";
+
+// icons
 import Icon from "./Icons";
 import { AiOutlineMenu } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+
+// components
 import Search from "./Search";
-import { signOut } from "firebase/auth";
-import { auth } from "../../Firebase";
 
 const Sidebar = ({
   isDarkModeActive,
@@ -19,36 +22,19 @@ const Sidebar = ({
   setIsExploreActive,
   setIsReelVideoActive,
 }) => {
-  const [isSvgActive, setIsSvgActive] = useState(false);
   const [isMoreMenuActive, setIsMoreMenuActive] = useState(false);
 
   const [isMessagePopupActive, setIsMessagePopupActive] = useState(false);
   const [isNotificationsPopupActive, setIsNotificationsPopupActive] =
     useState(false);
-
-  const logOut = async () => {
-    signOut(auth)
-      .then(() => {
-        // Sign-out succesful.
-      })
-      .catch((error) => {
-        alert(error);
-      });
-
-    signOutRouteChange("/");
-  };
-
-  let navigate = useNavigate();
-  const signOutRouteChange = (path) => {
-    navigate(path);
-  };
+  const { logout } = useLogout();
 
   return (
     <div className="fixed flex h-[1008px] w-[244px] flex-col justify-between border-r-[1px] border-instGrayish pl-3 pr-3 pb-5 dark:border-lightDark dark:bg-black dark:text-white">
       {/* Instagram Img & Sidebar Icons */}
       <div className="flex flex-col gap-9">
         {/* Instagram Img */}
-        <Link to="/main" onClick={() => setIsExploreActive(false)}>
+        <Link to="/homepage">
           {/* Insta Icon */}
           <div
             className={`${
@@ -115,7 +101,7 @@ const Sidebar = ({
 
         {/* Sidebar Icons */}
         <div className="flex flex-col gap-2">
-          <Link to="/main" onClick={() => setIsExploreActive(false)}>
+          <Link to="/homepage" onClick={() => setIsExploreActive(false)}>
             <Icon
               icon={
                 <svg
@@ -133,7 +119,7 @@ const Sidebar = ({
                 >
                   <path
                     d="M9.005 16.545a2.997 2.997 0 0 1 2.997-2.997A2.997 2.997 0 0 1 15 16.545V22h7V11.543L12 2 2 11.543V22h7.005Z"
-                    fill={`${isSvgActive ? "black" : "none"}`}
+                    fill="none"
                     stroke="currentColor"
                     stroke-linejoin="round"
                     stroke-width="2"
@@ -174,7 +160,7 @@ const Sidebar = ({
                     stroke="currentColor"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    stroke-width={`${isSvgActive ? "3" : "2"}`}
+                    stroke-width="2"
                   ></path>
                   <line
                     fill="none"
@@ -650,7 +636,7 @@ const Sidebar = ({
 
           <p
             className="flex cursor-pointer justify-between border-b-[1px] border-instGrayish border-opacity-50 px-4 py-2.5 active:opacity-50 dark:text-white"
-            onClick={logOut}
+            onClick={logout}
           >
             {" "}
             Log out

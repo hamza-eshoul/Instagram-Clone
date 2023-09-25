@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import PostCard from "./PostCard";
 import { v4 as uuidv4 } from "uuid";
 
-const ProfilePosts = ({ openPost, posts }) => {
+const ProfilePosts = ({ posts, profile }) => {
   return (
     <div className="mt-7 mb-7 border-t-[1px] border-instGrayish">
       <div className="flex items-center justify-center gap-1 pt-4 pb-3 font-semibold">
@@ -77,18 +77,7 @@ const ProfilePosts = ({ openPost, posts }) => {
       {/* Posts */}
       <div className="flex w-[935px] flex-wrap gap-7">
         {posts.map((post) => (
-          <PostCard
-            openPost={openPost}
-            postImg={post.postImgUrl}
-            postCaption={post.postCaption}
-            postComments={post.postComments}
-            postLikes={post.postLikes}
-            postTime={post.postTime}
-            nbrComments={post.nbrComments}
-            isPostLiked={post.isPostLiked}
-            postId={post.postId}
-            key={uuidv4()}
-          />
+          <PostCard key={uuidv4()} post={post} profile={profile} />
         ))}
       </div>{" "}
     </div>

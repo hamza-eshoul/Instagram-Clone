@@ -1,34 +1,21 @@
-import React, { useEffect, useState } from "react";
-import MainHome from "./Main/MainHome";
-import Sidebar from "./Main/Sidebar";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../Firebase";
-import Explore from "./Main/Explore";
+import { useState } from "react";
 
-const Main = ({
+// components
+import HomepageBody from "./HomepageBody";
+import Sidebar from "./Sidebar";
+import Explore from "./Explore";
+import CreatePost from "./CreatePost";
+
+const Homepage = ({
   isDarkModeActive,
   setIsDarkModeActive,
   activeProfile,
   setActiveProfile,
   userInfo,
-  setUserInfo,
   isSearchActive,
   setIsSearchActive,
   fetchSearchProfile,
-  setFetchSearchProfile,
 }) => {
-  useEffect(() => {
-    setFetchSearchProfile(false);
-  }, []);
-
-  // subscribing to auth changes
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setUserInfo(user);
-    }
-  });
-
   const [isAddingPost, setIsAddingPost] = useState(false);
   const [isExploreActive, setIsExploreActive] = useState(false);
   const [isReelVideoActive, setIsReelVideoActive] = useState(false);
@@ -50,16 +37,17 @@ const Main = ({
         setIsReelVideoActive={setIsReelVideoActive}
       />
 
+      {isAddingPost && (
+        <CreatePost
+          isAddingPost={isAddingPost}
+          setIsAddingPost={setIsAddingPost}
+        />
+      )}
+
       {isExploreActive ? (
         ""
       ) : (
-        <MainHome
-          isDarkModeActive={isDarkModeActive}
-          activeProfile={activeProfile}
-          setActiveProfile={setActiveProfile}
-          userInfo={userInfo}
-          isAddingPost={isAddingPost}
-          setIsAddingPost={setIsAddingPost}
+        <HomepageBody
           isReelVideoActive={isReelVideoActive}
           setIsReelVideoActive={setIsReelVideoActive}
         />
@@ -70,4 +58,4 @@ const Main = ({
   );
 };
 
-export default Main;
+export default Homepage;

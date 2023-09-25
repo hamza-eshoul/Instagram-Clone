@@ -4,106 +4,113 @@ import { RxCross2 } from "react-icons/rx";
 import { useEffect, useRef, useState } from "react";
 import { FcLike } from "react-icons/fc";
 import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
-import { db } from "../../Firebase";
+import { db } from "../../firebase/config";
 import { RingLoader } from "react-spinners";
 import { v4 as uuidv4 } from "uuid";
+import Overlay from "../../components/Overlay";
+import { useFirestore } from "../../hooks/useFirestore";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
-const PostFullSize = ({
-  profileImg,
-  postCaption,
-  postComments,
-  postLikes,
-  postTime,
-  profileName,
-  closePost,
-  postImg,
-  isPostFullSize,
-  updateLikes,
-  isDarkModeActive,
-  isPostLiked,
-  setIsPostLiked,
-  postId,
-  userInfo,
-  setPosts,
-}) => {
+const PostFullSize = ({ post, profile, setPostFullSize }) => {
   const [deletePost, setDeletePost] = useState(false);
   const [confirmDeletePost, setConfirmDeletePost] = useState(false);
   const [isPostBeingDeleted, setIsPostBeingDeleted] = useState(false);
   const [nonDeleteProfile, setNonDeleteProfile] = useState(false);
-
-  // Added Comments State
-  const [addedComments, setAddedComments] = useState({});
-  const [addedCommentText, setAddedCommentText] = useState("");
+  const [addCommentContent, setAddCommentContent] = useState("");
+  const { updateDocument } = useFirestore("profiles");
+  const { user } = useAuthContext();
 
   const ref = useRef(null);
 
-  useEffect(() => {
-    updateAddedComment();
-    return () => {
-      setAddedComments({});
-    };
-  }, [postImg]);
+  // const testCommentDb = () => {
+  //   console.log(post);
+  //   // console.log(...profile.profilePosts[0].postComments);
+  // };
 
-  const deletePostDb = () => {
-    setConfirmDeletePost(false);
-    setIsPostBeingDeleted(true);
+  // const addCommentDb = () => {
+  //   updateDocument(profile.profileName, {
+  //     profilePosts: [
+  //       ...post,
+  //       postComments: [
+  //         ...post.postComments,
+  //         {
+  //           commentAuthor: user.displayName,
+  //           commentContent: addCommentContent,
+  //           commentImgUrl: user.photoURL,
+  //         },
+  //       ],
+  //     ],
+  //   });
+  // };
 
-    const postRef = doc(
-      db,
-      "profiles",
-      userInfo.displayName,
-      "profilePosts",
-      postId
-    );
+  // useEffect(() => {
+  //   updateAddedComment();
+  //   return () => {
+  //     setAddedComments({});
+  //   };
+  // }, [postImg]);
 
-    deleteDoc(postRef).then(() => {
-      setPosts([]);
-      setIsPostBeingDeleted(false);
-      closePost();
-    });
-  };
+  // const deletePostDb = () => {
+  //   setConfirmDeletePost(false);
+  //   setIsPostBeingDeleted(true);
 
-  const addCommentDb = () => {
-    const postRef = doc(
-      db,
-      "profiles",
-      `${profileName}`,
-      "profilePosts",
-      `${postId}`
-    );
+  //   const postRef = doc(
+  //     db,
+  //     "profiles",
+  //     userInfo.displayName,
+  //     "profilePosts",
+  //     postId
+  //   );
 
-    const updatedComments = {};
+  //   deleteDoc(postRef).then(() => {
+  //     setPosts([]);
+  //     setIsPostBeingDeleted(false);
+  //     closePost();
+  //   });
+  // };
 
-    updatedComments[`addedPostComments.${uuidv4()}`] = {
-      commentContent: addedCommentText,
-      commentImgUrl: userInfo.photoURL,
-      commentName: userInfo.displayName,
-    };
+  // const addCommentDb = () => {
+  //   const postRef = doc(
+  //     db,
+  //     "profiles",
+  //     `${profileName}`,
+  //     "profilePosts",
+  //     `${postId}`
+  //   );
 
-    updateDoc(postRef, updatedComments);
+  //   const updatedComments = {};
 
-    setAddedCommentText("");
-  };
+  //   updatedComments[`addedPostComments.${uuidv4()}`] = {
+  //     commentContent: addedCommentText,
+  //     commentImgUrl: userInfo.photoURL,
+  //     commentName: userInfo.displayName,
+  //   };
 
-  const updateAddedComment = () => {
-    const postRef = doc(
-      db,
-      "profiles",
-      `${profileName}`,
-      "profilePosts",
-      `${postId}`
-    );
+  //   updateDoc(postRef, updatedComments);
 
-    getDoc(postRef).then((post) => {
-      if (post.data().addedPostComments) {
-        setAddedComments(post.data().addedPostComments);
-      }
-    });
-  };
+  //   setAddedCommentText("");
+  // };
+
+  // const updateAddedComment = () => {
+  //   const postRef = doc(
+  //     db,
+  //     "profiles",
+  //     `${profileName}`,
+  //     "profilePosts",
+  //     `${postId}`
+  //   );
+
+  //   getDoc(postRef).then((post) => {
+  //     if (post.data().addedPostComments) {
+  //       setAddedComments(post.data().addedPostComments);
+  //     }
+  //   });
+  // };
 
   return (
     <div>
-      {" "}
+      <Overlay />
+
       {/* Delete Post Section */}
       <div
         className={`fixed top-0 left-0 right-0 bottom-0 z-20 ${
@@ -123,8 +130,8 @@ const PostFullSize = ({
         <h2
           className="flex h-[40px] w-full cursor-pointer items-center justify-center p-1 text-sm font-bold text-[#ED4956] active:bg-instGrayish"
           onClick={() => {
-            setDeletePost(false);
-            setConfirmDeletePost(true);
+            // setDeletePost(false);
+            // setConfirmDeletePost(true);
           }}
         >
           {" "}
@@ -166,7 +173,7 @@ const PostFullSize = ({
         </h2>
         <h2
           className="flex h-[56px] w-full cursor-pointer  items-center justify-center border-t-[1px] border-instGrayish p-2 text-sm font-bold text-[#ED4956] active:bg-instGrayish"
-          onClick={deletePostDb}
+          // onClick={deletePostDb}
         >
           {" "}
           Delete{" "}
@@ -193,18 +200,17 @@ const PostFullSize = ({
         />
       </div>
       <RxCross2
-        className={`${isPostFullSize ? "absolute" : "hidden"}
-         top-6 left-[1680px] z-10 cursor-pointer text-3xl text-white`}
-        onClick={() => closePost()}
+        className="absolute
+         top-6 left-[1680px] z-10 cursor-pointer text-3xl text-white"
+        onClick={() => setPostFullSize(false)}
       />
-      <div
-        className={`${
-          isPostFullSize ? "absolute" : "hidden"
-        } left-64 top-10 z-10 flex h-[900px] rounded-xl bg-black`}
-      >
+      <div className="absolute left-64 top-10 z-10 flex h-[900px] rounded-xl bg-black">
         {/* Post Left Part */}
         <div className="h-full w-[750px]">
-          <img src={postImg} className="h-full w-full object-fill py-20" />
+          <img
+            src={post.postImgUrl}
+            className="h-full w-full object-fill py-20"
+          />
         </div>
         {/* Post Right Part */}
         <div className="h-full w-[550px] rounded-r-xl bg-white text-black dark:bg-hardDark dark:text-white">
@@ -212,11 +218,11 @@ const PostFullSize = ({
           <div className="flex items-center justify-between border-b-[1px] border-instGrayish border-opacity-50 px-4 py-3.5">
             <div className="flex items-center gap-3.5">
               <div className="h-[32px] w-[32px]">
-                <img src={profileImg} className="rounded-full" />
+                <img src={profile.profileImgUrl} className="rounded-full" />
               </div>
               <p className=" text-sm font-semibold">
                 {" "}
-                {profileName}
+                {profile.profileName}
                 <span className="pl-2">•</span>
               </p>
 
@@ -225,51 +231,46 @@ const PostFullSize = ({
 
             <BsThreeDots
               className="cardItemsHover text-xl"
-              onClick={() => {
-                if (profileName === userInfo.displayName) {
-                  setDeletePost(true);
-                } else {
-                  setNonDeleteProfile(true);
-                }
-              }}
+              // onClick={() => {
+              //   if (profileName === userInfo.displayName) {
+              //     setDeletePost(true);
+              //   } else {
+              //     setNonDeleteProfile(true);
+              //   }
+              // }}
             />
           </div>
           {/* Caption section  */}
           <div className="flex gap-3.5 px-4 py-3.5">
             <div className="h-[32px] w-[32px]">
-              <img src={profileImg} className="h-full w-full rounded-full" />
+              <img
+                src={profile.profileImgUrl}
+                className="h-full w-full rounded-full"
+              />
             </div>
 
             <div className="flex w-[480px] flex-col gap-1 ">
               <p className="text-justify text-sm">
                 {" "}
-                <span className="font-semibold">{profileName}</span>{" "}
-                {postCaption}
+                <span className="font-semibold">
+                  {profile.profileName}
+                </span>{" "}
+                {post.postCaption}
               </p>
               <p className="text-xs opacity-50"> </p>
             </div>
           </div>
           {/* Comments section */}
           <div className="h-[620px] border-b-[1px] border-instGrayish border-opacity-50">
-            {postComments
-              ? postComments.map((comment) => (
-                  <Comment
-                    commentName={comment.commentName}
-                    commentContent={comment.commentContent}
-                    commentImg={comment.commentImgUrl}
-                    key={uuidv4()}
-                  />
-                ))
-              : ""}
-
-            {Object.keys(addedComments).map((key) => (
-              <Comment
-                commentName={addedComments[key].commentName}
-                commentContent={addedComments[key].commentContent}
-                commentImg={addedComments[key].commentImgUrl}
-                key={uuidv4()}
-              />
-            ))}
+            {post.postComments &&
+              post.postComments.map((comment) => (
+                <Comment
+                  key={uuidv4()}
+                  commentAuthor={comment.commentAuthor}
+                  commentContent={comment.commentContent}
+                  commentImgUrl={comment.commentImgUrl}
+                />
+              ))}
           </div>
           {/* Add a comment section */}
           <div className="flex flex-col gap-4">
@@ -277,29 +278,25 @@ const PostFullSize = ({
             <div className="flex justify-between px-4 pt-3">
               <div className="flex cursor-pointer items-center justify-center gap-4">
                 <FcLike
-                  className={`${isPostLiked ? "text-[28px]" : "hidden"}`}
-                  onClick={() => {
-                    updateLikes("decrement", profileName, postId);
-                    setIsPostLiked(false);
-                  }}
+                  className={`${post.isPostLiked ? "text-[28px]" : "hidden"}`}
+                  // onClick={() => {
+                  //   updateLikes("decrement", profileName, postId);
+                  //   setIsPostLiked(false);
+                  // }}
                 />
                 <svg
                   aria-label="Like"
                   class="x1lliihq x1n2onr6"
-                  color={`${
-                    isDarkModeActive ? "rgb(250, 250, 250)" : "rgb(0, 0, 0)"
-                  } `}
-                  fill={`${
-                    isDarkModeActive ? "rgb(250, 250, 250)" : "rgb(0, 0, 0)"
-                  }`}
+                  color="rgb(0, 0, 0)"
+                  fill="rgb(0, 0, 0)"
                   height="24"
                   role="img"
                   viewBox="0 0 24 24"
                   width="24"
-                  className={`${isPostLiked ? "hidden" : ""}`}
+                  className={`${post.isPostLiked ? "hidden" : ""}`}
                   onClick={() => {
-                    updateLikes("increment", profileName, postId);
-                    setIsPostLiked(true);
+                    // updateLikes("increment", profileName, postId);
+                    // setIsPostLiked(true);
                   }}
                 >
                   <title>Like</title>
@@ -311,12 +308,8 @@ const PostFullSize = ({
                   <svg
                     aria-label="Comment"
                     class="x1lliihq x1n2onr6"
-                    color={`${
-                      isDarkModeActive ? "rgb(250, 250, 250)" : "rgb(0, 0, 0)"
-                    }`}
-                    fill={`${
-                      isDarkModeActive ? "rgb(250, 250, 250)" : "rgb(0, 0, 0)"
-                    }`}
+                    color="rgb(0, 0, 0)"
+                    fill="rgb(0, 0, 0)"
                     height="24"
                     role="img"
                     viewBox="0 0 24 24"
@@ -336,12 +329,8 @@ const PostFullSize = ({
                 <svg
                   aria-label="Share Post"
                   class="x1lliihq x1n2onr6"
-                  color={`${
-                    isDarkModeActive ? "rgb(250, 250, 250)" : "rgb(0, 0, 0)"
-                  }`}
-                  fill={`${
-                    isDarkModeActive ? "rgb(250, 250, 250)" : "rgb(0, 0, 0)"
-                  }`}
+                  color="rgb(0, 0, 0)"
+                  fill="rgb(0, 0, 0)"
                   height="24"
                   role="img"
                   viewBox="0 0 24 24"
@@ -371,12 +360,8 @@ const PostFullSize = ({
               <svg
                 aria-label="Save"
                 class="x1lliihq x1n2onr6"
-                color={`${
-                  isDarkModeActive ? "rgb(250, 250, 250)" : "rgb(0, 0, 0)"
-                }`}
-                fill={`${
-                  isDarkModeActive ? "rgb(250, 250, 250)" : "rgb(0, 0, 0)"
-                }`}
+                color="rgb(0, 0, 0)"
+                fill="rgb(0, 0, 0)"
                 height="24"
                 role="img"
                 viewBox="0 0 24 24"
@@ -394,10 +379,13 @@ const PostFullSize = ({
               </svg>
             </div>
             <div className="flex flex-col px-4">
-              <p className="text-[14px] font-semibold"> {postLikes} likes </p>
+              <p className="text-[14px] font-semibold">
+                {" "}
+                {post.postLikes} likes{" "}
+              </p>
               <p className="text-[10px] opacity-50">
                 {" "}
-                {postTime.toUpperCase()} AGO{" "}
+                {post.postTime.toUpperCase()} AGO{" "}
               </p>
             </div>
 
@@ -408,21 +396,21 @@ const PostFullSize = ({
                   type="text"
                   placeholder="Add a comment..."
                   className="grow resize-none text-[14px] outline-none placeholder:text-[#8E8E8E] dark:bg-hardDark"
-                  value={addedCommentText}
+                  value={addCommentContent}
                   onChange={(e) => {
-                    setAddedCommentText(e.target.value);
+                    setAddCommentContent(e.target.value);
                   }}
                   ref={ref}
                 />
                 <p
                   className={`${
-                    addedCommentText === ""
+                    addCommentContent === ""
                       ? "pointer-events-none opacity-40"
                       : "cursor-pointer opacity-100"
                   }  text-[14px]  font-semibold text-[#0095F6] dark:text-[#b3dbff] dark:opacity-100`}
                   onClick={() => {
-                    addCommentDb();
-                    updateAddedComment();
+                    // addCommentDb();
+                    // updateAddedComment();
                   }}
                 >
                   {" "}

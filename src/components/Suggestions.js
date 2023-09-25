@@ -2,9 +2,9 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-const Suggestion = ({ suggestionImg, suggestionName, setActiveProfile }) => {
+const Suggestion = ({ suggestionImage, suggestionName }) => {
   return (
-    <Link to="/profile" onClick={() => setActiveProfile(suggestionName)}>
+    <Link to={`/profile/${suggestionName}`}>
       {" "}
       <div className="flex w-[319px] cursor-pointer justify-between">
         {/* Img and Desc */}
@@ -12,7 +12,7 @@ const Suggestion = ({ suggestionImg, suggestionName, setActiveProfile }) => {
           {/* Img */}
           <div className="h-8 w-8">
             <img
-              src={suggestionImg}
+              src={suggestionImage}
               className="h-full w-full rounded-full object-cover "
             />
           </div>

@@ -1,21 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
-import { BsThreeDots } from "react-icons/bs";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
+
+// icons
 import { FcLike } from "react-icons/fc";
+import { BsThreeDots } from "react-icons/bs";
 
 const InstCard = ({
-  cardProfileImg,
+  cardProfileImage,
   cardProfileName,
-  cardProfileNickname,
-  isDarkModeActive,
   showVerify,
-  cardImg,
+  cardImage,
   likeNbr,
-  comment1Name,
-  comment1Content,
-  comment2Name,
-  comment2Content,
-  setActiveProfile,
+  comments,
 }) => {
   const ref = useRef(null);
 
@@ -31,19 +27,14 @@ const InstCard = ({
           {/* Profile Img */}
           <div className="h-8 w-8">
             <img
-              src={cardProfileImg}
+              src={cardProfileImage}
               className="h-full w-full rounded-full object-cover"
             />
           </div>
           {/* Name and nickname */}
           <div className="flex flex-col text-[14px]">
             <div className="flex items-center justify-center gap-1">
-              <Link
-                to="/profile"
-                onClick={() => {
-                  setActiveProfile(cardProfileName);
-                }}
-              >
+              <Link to="/profile">
                 {" "}
                 <p className="cardItemsHover font-bold">
                   {" "}
@@ -61,7 +52,7 @@ const InstCard = ({
               </div>{" "}
             </div>
 
-            <p className="text-[#8E8E8E]"> {cardProfileNickname} </p>
+            <p className="text-[#8E8E8E]"> {cardProfileName} </p>
           </div>
         </div>
         {/* Card Settings */}
@@ -70,7 +61,7 @@ const InstCard = ({
 
       {/* Card Image */}
       <div className="h-[585px] w-[468px]">
-        <img src={cardImg} className="h-full w-full" />
+        <img src={cardImage} className="h-full w-full" />
       </div>
 
       {/* Card functionality */}
@@ -97,12 +88,8 @@ const InstCard = ({
               <svg
                 aria-label="Like"
                 class="x1lliihq x1n2onr6"
-                color={`${
-                  isDarkModeActive ? "rgb(250, 250, 250)" : "rgb(0, 0, 0)"
-                }`}
-                fill={`${
-                  isDarkModeActive ? "rgb(250, 250, 250)" : "rgb(0, 0, 0)"
-                }`}
+                color="rgb(0, 0, 0)"
+                fill="rgb(0, 0, 0)"
                 height="24"
                 role="img"
                 viewBox="0 0 24 24"
@@ -117,12 +104,8 @@ const InstCard = ({
               <svg
                 aria-label="Comment"
                 class="x1lliihq x1n2onr6"
-                color={`${
-                  isDarkModeActive ? "rgb(250, 250, 250)" : "rgb(0, 0, 0)"
-                }`}
-                fill={`${
-                  isDarkModeActive ? "rgb(250, 250, 250)" : "rgb(0, 0, 0)"
-                }`}
+                color="rgb(0, 0, 0)"
+                fill="rgb(0, 0, 0)"
                 height="24"
                 role="img"
                 viewBox="0 0 24 24"
@@ -142,12 +125,8 @@ const InstCard = ({
             <svg
               aria-label="Share Post"
               class="x1lliihq x1n2onr6"
-              color={`${
-                isDarkModeActive ? "rgb(250, 250, 250)" : "rgb(0, 0, 0)"
-              }`}
-              fill={`${
-                isDarkModeActive ? "rgb(250, 250, 250)" : "rgb(0, 0, 0)"
-              }`}
+              color="rgb(0, 0, 0)"
+              fill=" rgb(0, 0, 0)"
               height="24"
               role="img"
               viewBox="0 0 24 24"
@@ -176,10 +155,8 @@ const InstCard = ({
           <svg
             aria-label="Save"
             class="x1lliihq x1n2onr6"
-            color={`${
-              isDarkModeActive ? "rgb(250, 250, 250)" : "rgb(0, 0, 0)"
-            }`}
-            fill={`${isDarkModeActive ? "rgb(250, 250, 250)" : "rgb(0, 0, 0)"}`}
+            color="rgb(0, 0, 0)"
+            fill="rgb(0, 0, 0)"
             height="24"
             role="img"
             viewBox="0 0 24 24"
@@ -200,31 +177,23 @@ const InstCard = ({
         <div className="flex flex-col gap-1 px-3">
           <p className="text-[14px] font-semibold">
             {" "}
-            <span>{likeNbrState}</span> likes
+            <span>{likeNbr}</span> likes
           </p>
 
-          <Link
-            to="/profile"
-            onClick={() => {
-              setActiveProfile(cardProfileName);
-            }}
-          >
+          <Link to="/profile">
             <p className="cursor-pointer text-[14px] text-[#8E8E8E]">
               {" "}
               View All Comments{" "}
             </p>
           </Link>
 
-          {/* Comment 1 */}
-          <div className="flex gap-1 text-[14px]">
-            <p className="font-semibold">{comment1Name}</p>
-            <p> {comment1Content} </p>
-          </div>
-          {/* Comment 2 */}
-          <div className="flex gap-1 text-[14px]">
-            <p className="font-semibold"> {comment2Name}</p>
-            <p> {comment2Content} </p>
-          </div>
+          {comments &&
+            comments.map((comment) => (
+              <div className="flex gap-1 text-[14px]">
+                <p className="font-semibold"> {comment.commentAuthor}</p>
+                <p> {comment.commentContent}</p>
+              </div>
+            ))}
         </div>
 
         {/* Add a comment */}

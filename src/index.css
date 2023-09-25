@@ -18,4 +18,16 @@
   .cardItemsHover {
     @apply cursor-pointer hover:opacity-50;
   }
+
+  .authInput {
+    @apply h-9 w-[80%] rounded border-[1px]  bg-[#FAFAFA] pt-[9px] pl-[8px] pb-[7px] text-sm  outline-none focus:border-zinc-400;
+  }
+
+  .authBtn {
+    @apply w-[80%] rounded-lg bg-[#0095F6] py-[7px] px-[16px] text-[14px] font-semibold text-white;
+  }
+
+  .asideLink {
+    @apply cursor-pointer text-[12px] text-[#8E8E8E];
+  }
 }
