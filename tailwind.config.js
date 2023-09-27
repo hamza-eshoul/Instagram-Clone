@@ -12,6 +12,9 @@ module.exports = {
         lightDark: "#262626",
         hardDark: "#121212",
       },
+      screens: {
+        mdl: "875px",
+      },
     },
   },
 };

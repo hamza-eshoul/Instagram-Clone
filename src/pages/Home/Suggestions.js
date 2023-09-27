@@ -28,7 +28,7 @@ const Suggestion = ({ suggestionImage, suggestionName }) => {
                 {" "}
                 <img
                   src={
-                    "https://firebasestorage.googleapis.com/v0/b/instagram-clone-c9891.appspot.com/o/profiles%2Fverify.png?alt=media&token=a71c8756-0c9b-40a9-801a-9206916c1193"
+                    "https://firebasestorage.googleapis.com/v0/b/instagram-clone-c9891.appspot.com/o/verify.jpg?alt=media&token=ee31a9cd-cc7d-4293-a15d-1408c2c06690"
                   }
                   className="h-full w-full"
                 />

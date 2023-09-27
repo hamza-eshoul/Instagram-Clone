@@ -1,11 +1,9 @@
-import React from "react";
-
-const Icon = ({ icon, iconText, isSearchActive }) => {
+const Icons = ({ icon, iconText, isSearchActive }) => {
   return (
     <div
       className={`${
         isSearchActive ? "hover:bg-transparent dark:hover:bg-transparent" : ""
-      } transition-duration-300 group flex cursor-pointer items-center gap-4 p-3 transition  ease-in-out hover:rounded-2xl hover:bg-[#FAFAFA] dark:hover:bg-lightDark`}
+      } transition-duration-300 group flex cursor-pointer items-center gap-4 p-3 transition ease-in-out hover:rounded-2xl hover:bg-[#FAFAFA] dark:hover:bg-lightDark`}
     >
       <i className="text-[14px] group-hover:scale-[1.05] group-hover:fill-black">
         {icon}
@@ -13,13 +11,12 @@ const Icon = ({ icon, iconText, isSearchActive }) => {
       <p
         className={`${
           isSearchActive ? "hidden" : ""
-        } text-[16px] group-active:font-bold`}
+        } hidden text-[16px] group-active:font-bold lg:block`}
       >
-        {" "}
         {iconText}{" "}
       </p>
     </div>
   );
 };
 
-export default Icon;
+export default Icons;

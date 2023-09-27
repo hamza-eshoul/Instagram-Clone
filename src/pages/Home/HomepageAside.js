@@ -1,17 +1,16 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
 // images
 import defaultProfile from "../../assets/images/defaultProfile.png";
-import SuggestionsList from "../../components/SuggestionsList";
-import AsideLinks from "../../components/AsideLinks";
+import SuggestionsList from "./SuggestionsList";
+import AsideLinks from "./AsideLinks";
 
 const HomepageAside = () => {
   const { user } = useAuthContext();
 
   return (
-    <section className="mt-4 flex w-[319px] flex-col gap-4">
+    <section className="mt-4 hidden w-[319px] flex-col gap-4 xl:flex">
       <div className="mt-4 flex h-[66px] items-center justify-between">
         <div className="flex cursor-pointer items-center justify-center gap-4">
           <div className="h-[56px] w-[56px]">
@@ -22,7 +21,7 @@ const HomepageAside = () => {
             />
           </div>
           <div className="flex flex-col text-[14px]">
-            <Link to="/profile">
+            <Link to={`/profile/${user.displayName}`}>
               {" "}
               <p className="font-bold dark:text-white"> {user.displayName}</p>
             </Link>

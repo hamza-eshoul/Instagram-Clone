@@ -39,7 +39,6 @@ const AsideLinks = () => {
           target="_blank"
           className="asideLink"
         >
-          {" "}
           {link.linkName}
         </a>
       ))}

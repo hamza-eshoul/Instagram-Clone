@@ -10,7 +10,7 @@ const DownloadAppLinks = () => {
         >
           <img
             src={
-              "https://firebasestorage.googleapis.com/v0/b/instagram-clone-c9891.appspot.com/o/profiles%2FHomeImg%2FdlAppStore.png?alt=media&token=f9bd4ba2-68cb-4244-ab6b-0d8cc223e085"
+              "https://firebasestorage.googleapis.com/v0/b/instagram-clone-c9891.appspot.com/o/downloadApp.png?alt=media&token=a96b7715-3749-4378-80ce-47d82397033e"
             }
             className="h-full w-full"
           />
@@ -22,7 +22,7 @@ const DownloadAppLinks = () => {
         >
           <img
             src={
-              "https://firebasestorage.googleapis.com/v0/b/instagram-clone-c9891.appspot.com/o/profiles%2FHomeImg%2FdlGooglePlay.png?alt=media&token=a8db9dce-b28f-40f6-a763-9e389e7cb146"
+              "https://firebasestorage.googleapis.com/v0/b/instagram-clone-c9891.appspot.com/o/GetOnGooglePlay.png?alt=media&token=3470cdc4-7e92-4209-bb66-42adef0298bd"
             }
             className="h-full w-full"
           />

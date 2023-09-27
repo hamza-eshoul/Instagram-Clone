@@ -24,12 +24,12 @@ const PhoneMockups = () => {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative hidden mdl:block ">
       <div className="h-[620px] w-[450px]">
         {" "}
         <img
           src={
-            "https://firebasestorage.googleapis.com/v0/b/instagram-clone-c9891.appspot.com/o/profiles%2FHomeImg%2Fphones.png?alt=media&token=f1232220-bbde-4b30-a50c-563ea10aa11e"
+            "https://firebasestorage.googleapis.com/v0/b/instagram-clone-c9891.appspot.com/o/phone-mockup.png?alt=media&token=525a3d94-3207-4373-bb20-4e8eaec53598"
           }
           className="h-full w-full object-cover"
         />

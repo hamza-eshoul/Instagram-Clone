@@ -1,5 +1,9 @@
-import React from "react";
 import { Link } from "react-router-dom";
+
+// images
+import defaultProfile from "../assets/images/defaultProfile.png";
+
+// icons
 import { BiSearchAlt } from "react-icons/bi";
 
 const SearchQuery = ({
@@ -7,23 +11,14 @@ const SearchQuery = ({
   searchName,
   searchFullName,
   searchId,
-  setActiveProfile,
   setIsSearchActive,
-  fetchSearchProfile,
-  setPosts,
 }) => {
   return (
     <Link
-      to="/profile"
+      reloadDocument
+      to={`/profile/${searchId}`}
       onClick={() => {
-        if (fetchSearchProfile) {
-          setPosts([]);
-          setActiveProfile(searchId);
-          setIsSearchActive(false);
-        } else {
-          setActiveProfile(searchId);
-          setIsSearchActive(false);
-        }
+        setIsSearchActive(false);
       }}
     >
       <div className="flex items-center justify-between px-2 pr-5 hover:bg-instGrayish hover:bg-opacity-20">
@@ -31,7 +26,7 @@ const SearchQuery = ({
           {/* Profile Img */}
           <div className="w-18 h-11 pl-6">
             <img
-              src={searchImg}
+              src={searchImg ? searchImg : defaultProfile}
               className="h-full w-full rounded-full object-cover"
             />
           </div>

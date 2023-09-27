@@ -35,7 +35,7 @@ export const useSignup = () => {
         nbrFollowing: 0,
         nbrPosts: 0,
         profileName: username,
-        photoURL: "",
+        profileImgUrl: "",
       });
 
       //   dispatch login action

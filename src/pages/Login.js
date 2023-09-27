@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // components
 import Footer from "../components/Footer";
@@ -13,7 +13,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, isPending, error } = useLogin();
-  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,12 +20,12 @@ const Login = () => {
   };
 
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-around  font-sans">
+    <div className="mx-auto flex min-h-screen max-w-sm flex-col items-center justify-around px-5 font-sans mdl:max-w-4xl">
       <div className="mt-28 flex">
         <PhoneMockups />
 
         {/* Sign Up And Download */}
-        <div className="flex w-[348px] flex-col gap-3">
+        <div className="flex flex-col gap-3 mdl:px-6">
           {/* Sign up & Login */}
           <form
             className="flex w-full flex-col items-center justify-center gap-5 border-[1px] border-instGrayish py-10"
@@ -36,7 +35,7 @@ const Login = () => {
               {/* Insta Img */}
               <img
                 src={
-                  "https://firebasestorage.googleapis.com/v0/b/instagram-clone-c9891.appspot.com/o/profiles%2FHomeImg%2Finstagram.png?alt=media&token=460edde3-4b9e-4f0f-b789-b2d4ca4edb0d"
+                  "https://firebasestorage.googleapis.com/v0/b/instagram-clone-c9891.appspot.com/o/instagram-written-logo.png?alt=media&token=932674c8-42e5-4918-b607-d324b3aa5f5f"
                 }
                 className="h-full w-full "
               />

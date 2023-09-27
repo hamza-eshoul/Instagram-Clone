@@ -1,13 +1,16 @@
-import React from "react";
+// images
+import defaultProfile from "../../assets/images/defaultProfile.png";
+
+// icons
 import { BsThreeDots } from "react-icons/bs";
 
-const ProfileHead = ({ profile }) => {
+const ProfileHead = ({ profile, postsLength }) => {
   return (
     <div className="mt-8 flex -translate-x-28 gap-28">
       {/* Profile Img */}
       <div className="h-[150px] w-[150px]">
         <img
-          src={profile.profileImgUrl}
+          src={profile.profileImgUrl ? profile.profileImgUrl : defaultProfile}
           className="h-full w-full rounded-full object-contain"
         />
       </div>
@@ -27,10 +30,8 @@ const ProfileHead = ({ profile }) => {
         <div className="flex gap-8">
           <p>
             {" "}
-            <span className="font-semibold">
-              {profile.profilePosts.length}
-            </span>{" "}
-            {profile.profilePosts.length == 1 ? "post" : "posts"}
+            <span className="font-semibold">{postsLength}</span>{" "}
+            {postsLength > 1 ? "posts" : "post"}
           </p>
           <p>
             {" "}

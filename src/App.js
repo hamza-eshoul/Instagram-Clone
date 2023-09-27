@@ -7,58 +7,54 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Homepage from "./pages/Home/Homepage";
 import ProfilePage from "./pages/Profile/ProfilePage";
+import Sidebar from "./components/Sidebar";
+import Explore from "./pages/Explore";
+import ReelVideo from "./components/ReelVideo";
+import CreatePost from "./components/CreatePost";
 
 const App = () => {
-  const [isDarkModeActive, setIsDarkModeActive] = useState(false);
-  const [activeProfile, setActiveProfile] = useState("hamzaskyn");
-  const [isSearchActive, setIsSearchActive] = useState(false);
-  const [fetchSearchProfile, setFetchSearchProfile] = useState(false);
-
-  // User Info
-  const [userInfo, setUserInfo] = useState({});
-  const { authIsReady } = useAuthContext();
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isReel, setIsReel] = useState(false);
+  const [isAddPost, setIsAddPost] = useState(false);
+  const { user, authIsReady } = useAuthContext();
 
   return (
-    <div className={`${isDarkModeActive ? "dark" : ""}`}>
+    <div className={`${isDarkMode ? "dark" : ""}`}>
       {authIsReady && (
         <BrowserRouter basename="/">
-          {" "}
+          <Sidebar
+            isDarkMode={isDarkMode}
+            setIsDarkMode={setIsDarkMode}
+            setIsReel={setIsReel}
+            setIsAddPost={setIsAddPost}
+          />
+
+          {isReel && <ReelVideo setIsReel={setIsReel} />}
+          {isAddPost && <CreatePost setIsAddPost={setIsAddPost} />}
+
           <Routes>
-            <Route path="/" element={<Navigate to="/login" />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
             <Route
-              path="/homepage"
+              path="/"
               element={
-                <Homepage
-                  isDarkModeActive={isDarkModeActive}
-                  setIsDarkModeActive={setIsDarkModeActive}
-                  activeProfile={activeProfile}
-                  setActiveProfile={setActiveProfile}
-                  userInfo={userInfo}
-                  setUserInfo={setUserInfo}
-                  isSearchActive={isSearchActive}
-                  setIsSearchActive={setIsSearchActive}
-                  fetchSearchProfile={fetchSearchProfile}
-                  setFetchSearchProfile={setFetchSearchProfile}
-                />
+                user ? <Navigate to="/homepage" /> : <Navigate to="/login" />
               }
             />
             <Route
+              path="/signup"
+              element={user ? <Navigate to="/homepage" /> : <Signup />}
+            />
+            <Route
+              path="/login"
+              element={user ? <Navigate to="/homepage" /> : <Login />}
+            />
+            <Route
+              path="/homepage"
+              element={user ? <Homepage setIsReel={setIsReel} /> : <Login />}
+            />
+            <Route path="/explore" element={user ? <Explore /> : <Login />} />
+            <Route
               path="/profile/:profileName"
-              element={
-                <ProfilePage
-                  activeProfile={activeProfile}
-                  setActiveProfile={setActiveProfile}
-                  isDarkModeActive={isDarkModeActive}
-                  setIsDarkModeActive={setIsDarkModeActive}
-                  userInfo={userInfo}
-                  isSearchActive={isSearchActive}
-                  setIsSearchActive={setIsSearchActive}
-                  fetchSearchProfile={fetchSearchProfile}
-                  setFetchSearchProfile={setFetchSearchProfile}
-                />
-              }
+              element={user ? <ProfilePage /> : <Navigate to="/login" />}
             />
           </Routes>
         </BrowserRouter>

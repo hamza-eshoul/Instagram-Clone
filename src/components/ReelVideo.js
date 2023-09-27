@@ -1,19 +1,19 @@
-import ReactPlayer from "react-player";
+import ReactPlayer from "react-player/youtube";
 
 // icons
 import { RxCross2 } from "react-icons/rx";
 
 // components
-import Overlay from "../../components/Overlay";
+import Overlay from "./Overlay";
 
-const ReelVideo = ({ setIsReelVideoActive }) => {
+const ReelVideo = ({ setIsReel }) => {
   return (
     <>
-      <div className="absolute top-[100px] left-[600px] z-40 bg-white">
+      <div className="fixed left-[55%] top-[50%] z-40 mx-auto -translate-x-1/2 -translate-y-1/2 bg-white">
         <RxCross2
           className=" absolute top-[-40px] right-[-80px] cursor-pointer text-3xl text-white"
           onClick={() => {
-            setIsReelVideoActive(false);
+            setIsReel(false);
           }}
         />
         <ReactPlayer
