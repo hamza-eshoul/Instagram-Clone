@@ -21,21 +21,21 @@ const SidebarMenu = ({ isDarkMode, setIsDarkMode }) => {
 
       {isMoreMenuActive && (
         <div className="absolute bottom-20 translate-y-5 flex-col gap-3 dark:text-red-500">
-          <div className="z-3 w-[245px] rounded-lg bg-white drop-shadow-lg dark:bg-lightDark">
-            <div className="flex cursor-pointer justify-between border-b-[1px] border-instGrayish border-opacity-50 px-4 py-2.5 active:opacity-50 dark:text-white">
+          <div className="w-[245px] rounded-lg bg-white drop-shadow-lg dark:bg-lightDark">
+            <div className="menuBtn">
               <p> Settings</p>
               <SettingsSvg />
             </div>
-            <div className="flex cursor-pointer justify-between border-b-[1px] border-instGrayish border-opacity-50 px-4 py-2.5 active:opacity-50 dark:text-white">
+            <div className="menuBtn">
               <p> Your Activity</p>
               <ActivitySvg />
             </div>{" "}
-            <div className="flex cursor-pointer justify-between border-b-[1px] border-instGrayish border-opacity-50 px-4 py-2.5 active:opacity-50 dark:text-white">
+            <div className="menuBtn">
               <p> Saved</p>
               <SaveSvg />
             </div>{" "}
             <div
-              className="flex cursor-pointer justify-between border-b-[1px] border-instGrayish border-opacity-50 px-4 py-2.5 active:opacity-50 dark:text-white"
+              className="menuBtn"
               onClick={() => {
                 setIsDarkMode(!isDarkMode);
               }}
@@ -43,22 +43,16 @@ const SidebarMenu = ({ isDarkMode, setIsDarkMode }) => {
               <p> Switch appearance</p>
               <DarkModeSvg />
             </div>{" "}
-            <div className="flex cursor-pointer justify-between border-b-[1px] border-instGrayish border-opacity-50 px-4 py-2.5 active:opacity-50 dark:text-white">
+            <div className="menuBtn">
               <p> Report a problem </p>
               <ProblemSvg />
             </div>
           </div>
 
-          <div className="z-3 w-[245px] rounded-lg bg-white drop-shadow-lg dark:bg-lightDark">
-            <p className="flex cursor-pointer justify-between border-b-[1px] border-instGrayish border-opacity-50 px-4 py-2.5 active:opacity-50 dark:text-white">
-              {" "}
-              Switch accounts
-            </p>
+          <div className="w-[245px] rounded-lg bg-white drop-shadow-lg dark:bg-lightDark">
+            <p className="menuBtn"> Switch accounts</p>
 
-            <p
-              className="flex cursor-pointer justify-between border-b-[1px] border-instGrayish border-opacity-50 px-4 py-2.5 active:opacity-50 dark:text-white"
-              onClick={logout}
-            >
+            <p className="menuBtn" onClick={logout}>
               {" "}
               Log out
             </p>
@@ -68,7 +62,7 @@ const SidebarMenu = ({ isDarkMode, setIsDarkMode }) => {
 
       {/* Hamburger Menu */}
       <div
-        className="flex cursor-pointer items-center gap-3 p-3 hover:rounded-2xl hover:bg-[#FAFAFA] dark:hover:bg-[#121212]"
+        className="flex cursor-pointer items-center gap-4 p-3 hover:rounded-2xl hover:bg-[#FAFAFA] dark:hover:bg-[#121212]"
         onClick={() => {
           setIsMoreMenuActive(!isMoreMenuActive);
         }}

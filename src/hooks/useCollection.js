@@ -20,7 +20,7 @@ export const useCollection = (col, _queryArgs, _orderArgs) => {
     setIsPending(true);
     let colRef = collection(db, col);
 
-    if (queryArgs) {
+    if (queryArgs && !orderArgs) {
       const q = query(collection(db, col), where(...queryArgs));
       colRef = q;
     }
@@ -36,6 +36,7 @@ export const useCollection = (col, _queryArgs, _orderArgs) => {
         where(...queryArgs),
         orderBy(...orderArgs)
       );
+
       colRef = order_q;
     }
 
@@ -60,7 +61,7 @@ export const useCollection = (col, _queryArgs, _orderArgs) => {
     return () => {
       unsub();
     };
-  }, [col, queryArgs]);
+  }, [col, queryArgs, orderArgs]);
 
   return { documents, isPending, error };
 };

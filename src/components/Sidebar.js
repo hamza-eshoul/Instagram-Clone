@@ -42,34 +42,35 @@ const Sidebar = ({ isDarkMode, setIsDarkMode, setIsReel, setIsAddPost }) => {
   }
 
   return (
-    <div className="fixed bottom-1 flex w-full flex-col justify-between border-t-[1px] border-instGrayish bg-white dark:border-lightDark dark:bg-black dark:text-white md:min-h-screen md:w-auto md:border-r-[1px] md:p-4">
+    <div className="fixed bottom-0 z-10 flex w-full flex-col justify-between border-t-[1px] border-instGrayish bg-white pr-10 dark:border-lightDark dark:bg-black dark:text-white md:min-h-screen md:w-auto md:border-r-[1px] md:p-4 ">
       {/* Instagram Img & Sidebar Icons */}
-      <div className="flex items-center justify-center px-0 md:flex-col md:gap-9 md:px-0">
+      <div className="flex items-center  px-0 md:flex-col md:gap-9 md:px-0 lg:items-start">
         {/* Instagram Img */}
         <Link to="/homepage">
           {/* Insta Svg */}
-          <div className="hidden md:block lg:hidden ">
+          <div
+            className={`${
+              isSearchActive ? "block" : "lg:hidden"
+            } hidden pt-1 md:block lg:pl-3`}
+          >
             <InstaLogoSvg />
           </div>
           {/* Insta Img */}
-          <div className="hidden lg:block">
+
+          <div
+            className={`${
+              isSearchActive ? "hidden" : "lg:block"
+            } hidden pt-6 pl-3`}
+          >
             <InstaImgSvg />
           </div>
         </Link>
-
-        {/* Search Interface */}
-
-        {isSearchActive && <Search setIsSearchActive={setIsSearchActive} />}
 
         {/* Sidebar Icons */}
 
         <div className="flex grow justify-around gap-2 md:flex-col">
           <Link to="/homepage">
-            <Icon
-              icon={<HomeSvg />}
-              iconText={"Home"}
-              isSearchActive={isSearchActive}
-            />
+            <Icon icon={<HomeSvg />} iconText={"Home"} />
           </Link>
 
           {/* Search Functionality */}
@@ -79,54 +80,30 @@ const Sidebar = ({ isDarkMode, setIsDarkMode, setIsReel, setIsAddPost }) => {
             }}
             className="hidden md:block"
           >
-            <Icon
-              icon={<SearchSvg />}
-              iconText={"Search"}
-              isSearchActive={isSearchActive}
-            />
+            <Icon icon={<SearchSvg />} iconText={"Search"} />
           </div>
 
           <Link to="/explore">
-            <Icon
-              icon={<ExploreSvg />}
-              iconText={"Explore"}
-              isSearchActive={isSearchActive}
-            />
+            <Icon icon={<ExploreSvg />} iconText={"Explore"} />
           </Link>
 
           <div onClick={() => setIsReel(true)}>
-            <Icon
-              icon={<ReelSvg />}
-              iconText={"Reels"}
-              isSearchActive={isSearchActive}
-            />
+            <Icon icon={<ReelSvg />} iconText={"Reels"} />
           </div>
 
           <div className="relative" onClick={() => toggleToastNotification()}>
-            <Icon
-              icon={<MessagesSvg />}
-              iconText={"Messages"}
-              isSearchActive={isSearchActive}
-            />{" "}
+            <Icon icon={<MessagesSvg />} iconText={"Messages"} />{" "}
           </div>
 
           <div
             className="relative hidden md:block"
             onClick={() => toggleToastNotification()}
           >
-            <Icon
-              icon={<NotificationsSvg />}
-              iconText={"Notifications"}
-              isSearchActive={isSearchActive}
-            />
+            <Icon icon={<NotificationsSvg />} iconText={"Notifications"} />
           </div>
 
           <div onClick={() => setIsAddPost(true)}>
-            <Icon
-              icon={<CreateSvg />}
-              iconText={"Create"}
-              isSearchActive={isSearchActive}
-            />
+            <Icon icon={<CreateSvg />} iconText={"Create"} />
           </div>
 
           <Link to={`/profile/${user.displayName}`}>
@@ -141,12 +118,12 @@ const Sidebar = ({ isDarkMode, setIsDarkMode, setIsReel, setIsAddPost }) => {
                 </div>
               }
               iconText={user.displayName}
-              isSearchActive={isSearchActive}
             />
           </Link>
         </div>
       </div>
       <SidebarMenu isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+      {isSearchActive && <Search setIsSearchActive={setIsSearchActive} />}
 
       <Toast
         toastNotification={toastNotification}

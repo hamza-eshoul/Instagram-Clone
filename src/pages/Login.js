@@ -20,13 +20,12 @@ const Login = () => {
   };
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-sm flex-col items-center justify-around px-5 font-sans mdl:max-w-4xl">
+    <div className="authContainer">
       <div className="mt-28 flex">
         <PhoneMockups />
 
-        {/* Sign Up And Download */}
         <div className="flex flex-col gap-3 mdl:px-6">
-          {/* Sign up & Login */}
+          {/*  Login */}
           <form
             className="flex w-full flex-col items-center justify-center gap-5 border-[1px] border-instGrayish py-10"
             onSubmit={handleSubmit}

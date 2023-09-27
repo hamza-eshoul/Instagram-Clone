@@ -3,9 +3,9 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 
 const ProfileFooter = () => {
   return (
-    <div className="fixed bottom-2 flex flex-col items-center gap-5 dark:bg-hardDark">
+    <div className="hidden flex-col items-center  gap-5  dark:bg-hardDark md:flex">
       {/* Links */}
-      <div className="flex gap-4">
+      <div className="flex flex-wrap items-center justify-center gap-4">
         <a
           href="https://about.meta.com/"
           target="_blank"

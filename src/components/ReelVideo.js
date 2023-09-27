@@ -9,9 +9,9 @@ import Overlay from "./Overlay";
 const ReelVideo = ({ setIsReel }) => {
   return (
     <>
-      <div className="fixed left-[55%] top-[50%] z-40 mx-auto -translate-x-1/2 -translate-y-1/2 bg-white">
+      <div className="fixed z-40  h-screen w-screen bg-white">
         <RxCross2
-          className=" absolute top-[-40px] right-[-80px] cursor-pointer text-3xl text-white"
+          className="fixed right-1 top-1 cursor-pointer text-3xl text-white"
           onClick={() => {
             setIsReel(false);
           }}
@@ -22,7 +22,8 @@ const ReelVideo = ({ setIsReel }) => {
           muted={true}
           loop={true}
           controls={false}
-          height={500}
+          height={"100%"}
+          width={"100%"}
         />
       </div>
       <Overlay />

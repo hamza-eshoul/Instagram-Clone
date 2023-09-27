@@ -1,21 +1,8 @@
-import { useCollection } from "../hooks/useCollection";
-
-// components
 import InstCard from "./InstCard";
-import Error from "./Error";
-import Loading from "./Loading";
 
-const InstCardList = () => {
-  const {
-    documents: posts,
-    error,
-    isPending,
-  } = useCollection("profiles_posts", null, ["createdAt", "desc"]);
-
+const InstCardList = ({ posts }) => {
   return (
-    <div className="flex flex-col gap-3">
-      {isPending && <Loading loadingHeight={"h-screen"} loadingSize={50} />}
-      {error && <Error error={error} />}
+    <div className="flex flex-col gap-4">
       {posts &&
         posts.map((post) => (
           <InstCard

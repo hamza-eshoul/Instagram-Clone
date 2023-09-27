@@ -62,7 +62,7 @@ const CreatePost = ({ setIsAddPost }) => {
         onClick={resetAddPost}
       />
       {/* Add Post */}
-      <div className="fixed top-24 left-[500px] z-10 flex h-[832px] w-[789px] flex-col rounded-xl bg-white">
+      <div className="fixed top-[50%] left-[50%] z-10  mx-auto flex w-[80%] -translate-x-1/2 -translate-y-1/2 flex-col rounded-xl bg-white md:w-1/2">
         <h1 className="flex h-11 w-full items-center justify-center border-b-[1px] border-instGrayish font-semibold">
           {" "}
           Create a new post
@@ -72,7 +72,7 @@ const CreatePost = ({ setIsAddPost }) => {
         <div
           className={`${
             postImage === null ? "flex" : "hidden"
-          } h-[calc(100%-44px)] flex-col items-center justify-center gap-6`}
+          } flex-col items-center justify-center gap-6 p-12 md:py-[20%] lg:py-[30%]`}
         >
           <div className="flex flex-col items-center justify-center gap-2">
             <h2 className="text-xl"> Drag photos here </h2>
@@ -101,37 +101,37 @@ const CreatePost = ({ setIsAddPost }) => {
           </button>
         </div>
 
-        {/* Image */}
+        {/* Image Upload */}
 
         <div
           className={`${
             postImage === null ? "hidden" : "flex"
-          } h-[calc(100%-44px)] w-full flex-col items-center gap-5`}
+          } mb-4  w-full flex-col items-center gap-5`}
         >
-          <img
-            src={postImage && URL.createObjectURL(postImage)}
-            className="h-[80%] w-full object-cover"
-          />
+          <div className="h-[300px] w-full lg:h-[500px]">
+            <img
+              src={postImage && URL.createObjectURL(postImage)}
+              className="h-full w-full object-fill"
+            />
+          </div>
           <textarea
             placeholder="Write a caption..."
             className="h-14 w-1/2 resize-none border-[1px] p-1 outline-none"
             value={postCaption}
             onChange={(e) => setPostCaption(e.target.value)}
           />{" "}
-          <div className="flex items-center justify-center ">
-            <button
-              className="rounded-lg bg-lightBlue px-8 py-2 text-lg font-semibold text-white hover:bg-darkBlue"
-              onClick={() => {
-                uploadPostImage(postImage);
-              }}
-            >
-              {isPending ? (
-                <Loading loadingColor={"white"} loadingSize={30} />
-              ) : (
-                "Share"
-              )}
-            </button>
-          </div>
+          <button
+            className="rounded-lg bg-lightBlue px-8 py-2 text-lg font-semibold text-white hover:bg-darkBlue"
+            onClick={() => {
+              uploadPostImage(postImage);
+            }}
+          >
+            {isPending ? (
+              <Loading loadingColor={"white"} loadingSize={30} />
+            ) : (
+              "Share"
+            )}
+          </button>
         </div>
       </div>
     </>

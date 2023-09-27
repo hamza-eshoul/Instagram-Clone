@@ -49,21 +49,18 @@ const PostFullSize = ({ post, setPostFullSize }) => {
       )}
 
       {/* Post */}
-      <div className="fixed left-[55%] top-[50%] z-10 mx-auto flex h-[900px] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-black">
+      <div className="fixed left-[50%] top-[50%] z-10 mx-auto flex h-[900px] w-[90%] -translate-x-1/2 -translate-y-1/2 flex-col rounded-xl bg-black lg:flex-row">
         {/* Post Close Icon */}
         <RxCross2
-          className="absolute right-[-130px] top-[-40px] z-10 cursor-pointer text-3xl text-white "
+          className="fixed right-1 z-10 cursor-pointer text-3xl text-white lg:right-[-50px] lg:top-[-20px] "
           onClick={() => setPostFullSize(false)}
         />
         {/* Post Left Part */}
-        <div className="h-full w-[750px]">
-          <img
-            src={post.postImgUrl}
-            className="h-full w-full object-fill py-20"
-          />
+        <div className="h-[60%] w-full lg:h-full lg:w-[60%]">
+          <img src={post.postImgUrl} className="h-full w-full " />
         </div>
         {/* Post Right Part */}
-        <div className="h-full  rounded-r-xl bg-white text-black dark:bg-hardDark dark:text-white">
+        <div className="flex h-[40%] w-full flex-col rounded-r-xl bg-white text-black dark:bg-hardDark dark:text-white lg:h-full lg:w-[40%]">
           {/* Info section */}
           <div className="flex items-center justify-between border-b-[1px] border-instGrayish border-opacity-50 px-4 py-3.5">
             <div className="flex items-center gap-3.5">
@@ -98,7 +95,7 @@ const PostFullSize = ({ post, setPostFullSize }) => {
               />
             </div>
 
-            <div className="flex w-[480px] flex-col gap-1 ">
+            <div className="flex flex-col gap-1 ">
               <p className="text-justify text-sm">
                 {" "}
                 <span className="font-semibold">{post.postAuthor}</span>{" "}
@@ -108,7 +105,7 @@ const PostFullSize = ({ post, setPostFullSize }) => {
             </div>
           </div>
           {/* Comments section */}
-          <div className="h-[620px] border-b-[1px] border-instGrayish border-opacity-50">
+          <div className="mb-auto overflow-scroll">
             {post.postComments &&
               post.postComments.map((comment) => (
                 <Comment
@@ -120,7 +117,7 @@ const PostFullSize = ({ post, setPostFullSize }) => {
               ))}
           </div>
           {/* Add a comment section */}
-          <div className="flex flex-col gap-4">
+          <div className="mb-5 flex flex-col gap-4 border-t-[1px] border-instGrayish border-opacity-50">
             {/* Functionality Icons */}
             <div className="flex justify-between px-4 pt-3">
               <div className="flex cursor-pointer items-center justify-center gap-4">
@@ -139,7 +136,7 @@ const PostFullSize = ({ post, setPostFullSize }) => {
 
               <SaveSvg />
             </div>
-            <div className="flex flex-col px-4">
+            <div className="hidden flex-col px-4 lg:flex">
               <p className="text-[14px] font-semibold"> {likeNbr} likes </p>
               <p className="text-[10px] opacity-50">
                 {" "}

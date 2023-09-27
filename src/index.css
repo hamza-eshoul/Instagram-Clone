@@ -19,6 +19,10 @@
     @apply cursor-pointer hover:opacity-50;
   }
 
+  .authContainer {
+    @apply mx-auto flex min-h-screen max-w-sm flex-col items-center justify-around px-5 font-sans mdl:max-w-4xl;
+  }
+
   .authInput {
     @apply h-9 w-[80%] rounded border-[1px]  bg-[#FAFAFA] pt-[9px] pl-[8px] pb-[7px] text-sm  outline-none focus:border-zinc-400;
   }
@@ -29,5 +33,9 @@
 
   .asideLink {
     @apply cursor-pointer text-[12px] text-[#8E8E8E];
+  }
+
+  .menuBtn {
+    @apply flex cursor-pointer justify-between border-b-[1px] border-instGrayish border-opacity-50 px-4 py-2.5 active:opacity-50 dark:text-white;
   }
 }

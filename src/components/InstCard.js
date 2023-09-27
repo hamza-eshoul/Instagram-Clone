@@ -69,7 +69,7 @@ const InstCard = ({
       {/* Card Info */}
       <div className="flex items-center justify-between py-2 px-3">
         {/* Info */}
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center gap-3">
           {/* Profile Img */}
           <div className="h-8 w-8">
             <img
@@ -98,7 +98,7 @@ const InstCard = ({
 
       {/* Card Image */}
       <div
-        className="max-h-fit cursor-pointer"
+        className="h-[600px] cursor-pointer"
         onClick={() => setPostFullSize(true)}
       >
         <img src={postImg} className="h-full w-full" />

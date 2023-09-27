@@ -57,7 +57,7 @@ const Search = ({ setIsSearchActive }) => {
   }, [queryText, profiles]);
 
   return (
-    <div className="absolute z-40 ml-16 flex h-[1008px] w-[400px] flex-col gap-3 rounded-tr-xl rounded-br-xl border-l-[1px] border-instGrayish bg-white drop-shadow dark:border-lightDark dark:bg-hardDark">
+    <div className="fixed top-[-4px] z-40 ml-[50px] hidden h-screen flex-col gap-3 rounded-tr-xl rounded-br-xl border-l-[1px] border-instGrayish bg-white shadow-lg dark:border-lightDark dark:bg-hardDark md:flex">
       <h1 className="pl-[18px] pt-6 text-2xl font-semibold"> Search </h1>
       {/* Search Bar */}
       <div className="px-4">
