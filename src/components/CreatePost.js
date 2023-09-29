@@ -35,7 +35,6 @@ const CreatePost = ({ setIsAddPost }) => {
     // add document to db
     addDocument({
       postAuthor: user.displayName,
-      postAuthorImg: user.photoURL,
       postImgUrl: imgUrl,
       postLikes: 0,
       postCaption,
@@ -62,11 +61,11 @@ const CreatePost = ({ setIsAddPost }) => {
         onClick={resetAddPost}
       />
       {/* Add Post */}
-      <div className="fixed top-[50%] left-[50%] z-10  mx-auto flex w-[80%] -translate-x-1/2 -translate-y-1/2 flex-col rounded-xl bg-white md:w-1/2">
-        <h1 className="flex h-11 w-full items-center justify-center border-b-[1px] border-instGrayish font-semibold">
+      <section className="fixed top-[50%] left-[50%] z-10  mx-auto flex w-[80%] -translate-x-1/2 -translate-y-1/2 flex-col rounded-xl bg-white md:w-1/2">
+        <header className="flex h-11 w-full items-center justify-center border-b-[1px] border-instGrayish font-semibold">
           {" "}
           Create a new post
-        </h1>
+        </header>
 
         {/* Create Post Interface */}
         <div
@@ -75,7 +74,7 @@ const CreatePost = ({ setIsAddPost }) => {
           } flex-col items-center justify-center gap-6 p-12 md:py-[20%] lg:py-[30%]`}
         >
           <div className="flex flex-col items-center justify-center gap-2">
-            <h2 className="text-xl"> Drag photos here </h2>
+            <span className="text-xl"> Drag photos here </span>
             <PhotoSvg />
           </div>
 
@@ -133,7 +132,7 @@ const CreatePost = ({ setIsAddPost }) => {
             )}
           </button>
         </div>
-      </div>
+      </section>
     </>
   );
 };

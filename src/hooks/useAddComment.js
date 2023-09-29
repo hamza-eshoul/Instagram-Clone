@@ -12,11 +12,8 @@ export const useAddComment = () => {
       {
         commentAuthor: user.displayName,
         commentContent: commentContent,
-        commentImgUrl: user.photoURL ? user.photoURL : defaultProfile,
       },
     ];
-
-    console.log(updatedPostComments);
 
     updateDocument(post_id, {
       postComments: updatedPostComments,

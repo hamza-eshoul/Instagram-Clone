@@ -5,9 +5,9 @@ import { useParams } from "react-router-dom";
 // components
 import ProfileHead from "./ProfileHead";
 import ProfilePosts from "./ProfilePosts";
-import ProfileFooter from "./ProfileFooter";
 import Loading from "../../components/Loading";
 import Error from "../../components/Error";
+import Footer from "../../components/Footer";
 
 const ProfilePage = () => {
   const { profileName } = useParams();
@@ -31,20 +31,22 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="dark:bg-hardDark dark:text-white md:ml-[100px] lg:ml-[244px]">
-      {/* Profile Section */}
-      <section className="mx-auto mb-10 flex min-h-screen max-w-2xl flex-col items-center gap-2 xl:max-w-5xl">
-        {profile && posts && (
-          <ProfileHead profile={profile} postsLength={posts.length} />
-        )}
+    <>
+      <main className="md:ml-[100px] lg:ml-[244px]">
+        {/* Profile Section */}
+        <section className="mx-auto mb-10 flex min-h-screen max-w-2xl flex-col items-center gap-2 xl:max-w-5xl">
+          {profile && posts && (
+            <ProfileHead profile={profile} postsLength={posts.length} />
+          )}
 
-        {postsError && <Error error={postsError} />}
+          {postsError && <Error error={postsError} />}
 
-        {posts && <ProfilePosts posts={posts} />}
+          {posts && <ProfilePosts posts={posts} />}
+        </section>
+      </main>
 
-        <ProfileFooter />
-      </section>
-    </div>
+      <Footer profileFooter={"lg:ml-[246px] md:ml-[100px] hidden md:flex"} />
+    </>
   );
 };
 

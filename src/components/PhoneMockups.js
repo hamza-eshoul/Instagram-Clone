@@ -24,7 +24,7 @@ const PhoneMockups = () => {
   }, []);
 
   return (
-    <div className="relative hidden mdl:block ">
+    <section className="relative hidden mdl:block ">
       <div className="h-[620px] w-[450px]">
         {" "}
         <img
@@ -40,7 +40,7 @@ const PhoneMockups = () => {
           className="featureImage h-full w-full"
         />{" "}
       </div>
-    </div>
+    </section>
   );
 };
 

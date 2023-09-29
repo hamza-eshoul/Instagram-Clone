@@ -2,13 +2,12 @@ import InstCard from "./InstCard";
 
 const InstCardList = ({ posts }) => {
   return (
-    <div className="flex flex-col gap-4">
+    <section className="flex flex-col gap-2 sm:gap-4">
       {posts &&
         posts.map((post) => (
           <InstCard
             key={post.id}
             post_id={post.id}
-            authorImg={post.postAuthorImg}
             author={post.postAuthor}
             postImg={post.postImgUrl}
             likes={post.postLikes}
@@ -16,7 +15,7 @@ const InstCardList = ({ posts }) => {
             post={post}
           />
         ))}
-    </div>
+    </section>
   );
 };
 

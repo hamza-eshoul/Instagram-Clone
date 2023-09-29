@@ -20,7 +20,7 @@
   }
 
   .authContainer {
-    @apply mx-auto flex min-h-screen max-w-sm flex-col items-center justify-around px-5 font-sans mdl:max-w-4xl;
+    @apply mx-auto flex h-[87vh] max-w-sm items-center justify-center px-5 font-sans mdl:max-w-4xl;
   }
 
   .authInput {
@@ -36,6 +36,6 @@
   }
 
   .menuBtn {
-    @apply flex cursor-pointer justify-between border-b-[1px] border-instGrayish border-opacity-50 px-4 py-2.5 active:opacity-50 dark:text-white;
+    @apply flex cursor-pointer justify-between border-b-[1px] border-instGrayish border-opacity-50 px-4 py-2.5 active:opacity-50;
   }
 }

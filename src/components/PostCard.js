@@ -11,8 +11,12 @@ const PostCard = ({ post }) => {
   const [postFullSize, setPostFullSize] = useState(false);
 
   return (
-    <div className="group relative h-[300px] w-[300px]">
-      <img src={post.postImgUrl} className="h-full w-full cursor-pointer  " />{" "}
+    <article className="group relative h-[295px] w-[295px]">
+      <img
+        src={post.postImgUrl}
+        className="h-full w-full cursor-pointer"
+        alt="post"
+      />{" "}
       {/* Post Card */}
       <div
         className={`absolute top-0 bottom-0 right-0 left-0 cursor-pointer bg-[#262626] opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-80`}
@@ -39,7 +43,7 @@ const PostCard = ({ post }) => {
       {postFullSize && (
         <PostFullSize post={post} setPostFullSize={setPostFullSize} />
       )}
-    </div>
+    </article>
   );
 };
 

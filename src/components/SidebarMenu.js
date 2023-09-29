@@ -11,7 +11,7 @@ import { ReactComponent as SaveSvg } from "../assets/svg/Save.svg";
 import { ReactComponent as DarkModeSvg } from "../assets/svg/DarkMode.svg";
 import { ReactComponent as ProblemSvg } from "../assets/svg/Problem.svg";
 
-const SidebarMenu = ({ isDarkMode, setIsDarkMode }) => {
+const SidebarMenu = ({ toggleToastNotification }) => {
   const [isMoreMenuActive, setIsMoreMenuActive] = useState(false);
   const { logout } = useLogout();
 
@@ -20,58 +20,62 @@ const SidebarMenu = ({ isDarkMode, setIsDarkMode }) => {
       {/* Hamburger Menu Displayed */}
 
       {isMoreMenuActive && (
-        <div className="absolute bottom-20 translate-y-5 flex-col gap-3 dark:text-red-500">
-          <div className="w-[245px] rounded-lg bg-white drop-shadow-lg dark:bg-lightDark">
-            <div className="menuBtn">
-              <p> Settings</p>
+        <div className="-500 absolute bottom-20 flex translate-y-5 flex-col gap-2">
+          <ul className="rounded-lg bg-white drop-shadow-lg ">
+            <li className="menuBtn" onClick={() => toggleToastNotification()}>
+              <span> Settings</span>
               <SettingsSvg />
-            </div>
-            <div className="menuBtn">
-              <p> Your Activity</p>
+            </li>
+            <li className="menuBtn" onClick={() => toggleToastNotification()}>
+              <span> Your Activity</span>
               <ActivitySvg />
-            </div>{" "}
-            <div className="menuBtn">
-              <p> Saved</p>
+            </li>{" "}
+            <li className="menuBtn" onClick={() => toggleToastNotification()}>
+              <span> Saved</span>
               <SaveSvg />
-            </div>{" "}
-            <div
-              className="menuBtn"
-              onClick={() => {
-                setIsDarkMode(!isDarkMode);
-              }}
-            >
-              <p> Switch appearance</p>
+            </li>{" "}
+            <li className="menuBtn" onClick={() => toggleToastNotification()}>
+              <span> Switch appearance</span>
               <DarkModeSvg />
-            </div>{" "}
-            <div className="menuBtn">
-              <p> Report a problem </p>
+            </li>{" "}
+            <li className="menuBtn" onClick={() => toggleToastNotification()}>
+              <span> Report a problem </span>
               <ProblemSvg />
-            </div>
-          </div>
+            </li>
+          </ul>
 
-          <div className="w-[245px] rounded-lg bg-white drop-shadow-lg dark:bg-lightDark">
-            <p className="menuBtn"> Switch accounts</p>
+          <ul className="w-[245px] rounded-lg bg-white drop-shadow-lg ">
+            <li>
+              <button className="menuBtn w-full" onClick={logout}>
+                {" "}
+                Switch accounts
+              </button>
+            </li>
 
-            <p className="menuBtn" onClick={logout}>
-              {" "}
-              Log out
-            </p>
-          </div>
+            <li>
+              <button className="menuBtn" onClick={logout}>
+                {" "}
+                Log out
+              </button>
+            </li>
+          </ul>
         </div>
       )}
 
       {/* Hamburger Menu */}
       <div
-        className="flex cursor-pointer items-center gap-4 p-3 hover:rounded-2xl hover:bg-[#FAFAFA] dark:hover:bg-[#121212]"
+        className="flex cursor-pointer items-center gap-4 p-3 hover:rounded-2xl hover:bg-[#FAFAFA] "
         onClick={() => {
           setIsMoreMenuActive(!isMoreMenuActive);
         }}
       >
         <AiOutlineMenu className="text-2xl" />
-        <p className={`${isMoreMenuActive ? "font-bold" : ""} hidden lg:block`}>
+        <span
+          className={`${isMoreMenuActive ? "font-bold" : ""} hidden lg:block`}
+        >
           {" "}
           More{" "}
-        </p>
+        </span>
       </div>
     </div>
   );

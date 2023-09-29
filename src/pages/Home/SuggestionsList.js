@@ -35,7 +35,7 @@ const suggestions_list = [
 
 const SuggestionsList = () => {
   return (
-    <div className="mb-3.5 flex flex-col gap-3">
+    <section className="mb-3.5 flex flex-col gap-3">
       {suggestions_list.map((suggestion) => (
         <Suggestion
           key={suggestion.id}
@@ -43,7 +43,7 @@ const SuggestionsList = () => {
           suggestionImage={suggestion.image}
         />
       ))}
-    </div>
+    </section>
   );
 };
 

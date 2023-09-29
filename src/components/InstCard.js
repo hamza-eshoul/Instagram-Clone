@@ -20,16 +20,9 @@ import { useAddComment } from "../hooks/useAddComment";
 import PostFullSize from "./PostFullSize";
 import DeletePost from "./DeletePost";
 import { useUpdateLikes } from "../hooks/useUpdateLike";
+import { useDocument } from "../hooks/useDocument";
 
-const InstCard = ({
-  authorImg,
-  author,
-  postImg,
-  likes,
-  comments,
-  post_id,
-  post,
-}) => {
+const InstCard = ({ author, postImg, likes, comments, post_id, post }) => {
   const [postFullSize, setPostFullSize] = useState(false);
   const [commentContent, setCommentContent] = useState("");
   const [displayComments, setDisplayComments] = useState([]);
@@ -37,14 +30,15 @@ const InstCard = ({
   const { isPostLike, likeNbr, updateLikes } = useUpdateLikes(likes);
 
   const { addCommentDb } = useAddComment();
+  const { document: profile } = useDocument("profiles", author);
   const { user } = useAuthContext();
   const ref = useRef(null);
 
   useEffect(() => {
-    if (comments.length == 0) {
+    if (comments.length === 0) {
       setDisplayComments(null);
     }
-    if (comments.length == 1 || comments.length == 2) {
+    if (comments.length === 1 || comments.length === 2) {
       setDisplayComments(comments);
     }
     if (comments.length > 2) {
@@ -62,8 +56,8 @@ const InstCard = ({
   };
 
   return (
-    <div className="max-w-lg rounded-xl border-[1px] border-instGrayish bg-white dark:border-[#363636] dark:bg-hardDark dark:text-white">
-      {deletePost && user.displayName == post.postAuthor && (
+    <article className="max-w-lg border-[0.5px] border-instGrayish bg-white sm:rounded-lg sm:border-[1px]">
+      {deletePost && user.displayName === post.postAuthor && (
         <DeletePost setDeletePost={setDeletePost} post_id={post_id} />
       )}
       {/* Card Info */}
@@ -72,21 +66,24 @@ const InstCard = ({
         <div className="flex items-center justify-center gap-3">
           {/* Profile Img */}
           <div className="h-8 w-8">
-            <img
-              src={authorImg ? authorImg : defaultProfile}
-              className="h-full w-full rounded-full object-cover"
-            />
+            {profile && (
+              <img
+                src={
+                  profile.profileImgUrl ? profile.profileImgUrl : defaultProfile
+                }
+                className="h-full w-full rounded-full object-cover"
+                alt="profile"
+              />
+            )}
           </div>
           {/* Name and nickname */}
           <div className="flex flex-col text-[14px]">
-            <div className="flex items-center justify-center gap-1">
-              <Link to={`/profile/${author}`}>
-                {" "}
-                <p className="cardItemsHover font-bold"> {author} </p>{" "}
-              </Link>
-            </div>
+            <Link to={`/profile/${author}`}>
+              {" "}
+              <p className="cardItemsHover font-bold"> {author} </p>{" "}
+            </Link>
 
-            <p className="text-[#8E8E8E]"> {author} </p>
+            <span className="text-[#8E8E8E]"> {author} </span>
           </div>
         </div>
         {/* Card Settings */}
@@ -101,7 +98,7 @@ const InstCard = ({
         className="h-[600px] cursor-pointer"
         onClick={() => setPostFullSize(true)}
       >
-        <img src={postImg} className="h-full w-full" />
+        <img src={postImg} className="h-full w-full" alt="card" />
       </div>
 
       {/* Card functionality */}
@@ -109,14 +106,24 @@ const InstCard = ({
         {/* Functionality Icons */}
         <div className="flex items-center justify-between p-3">
           <div className="flex gap-4">
-            <div className="cursor-pointer" onClick={() => updateLikes()}>
-              {isPostLike && <FcLike className="text-[22px]" />}
-              {!isPostLike && <LikeSvg />}
-            </div>
+            {isPostLike && (
+              <FcLike
+                className="cursor-pointer text-[22px]"
+                onClick={() => updateLikes()}
+              />
+            )}
+            {!isPostLike && (
+              <LikeSvg
+                className="cursor-pointer"
+                onClick={() => updateLikes()}
+              />
+            )}
 
-            <div onClick={() => ref.current.focus()} className="cursor-pointer">
-              <CommentSvg />
-            </div>
+            <CommentSvg
+              onClick={() => ref.current.focus()}
+              className="cursor-pointer"
+            />
+
             <ShareSvg />
           </div>
           <SaveSvg />
@@ -149,34 +156,33 @@ const InstCard = ({
         </div>
 
         {/* Add a comment */}
-        <div className="mt-2 border-t-[0.5px] border-instGrayish p-3">
-          <div className="flex h-[20px] justify-between">
-            <textarea
-              type="text"
-              placeholder="Add a comment..."
-              className="grow resize-none text-[14px] outline-none placeholder:text-[#8E8E8E] dark:bg-black"
-              value={commentContent}
-              onChange={(e) => setCommentContent(e.target.value)}
-              ref={ref}
-            />
-            <p
-              className={`text-[14px] font-semibold text-[#0095F6] ${
-                commentContent == ""
-                  ? "pointer-events-none opacity-40"
-                  : "cursor-pointer opacity-100"
-              } dark:text-[#b3dbff] dark:opacity-100`}
-              onClick={() => handleAddComment()}
-            >
-              {" "}
-              Post{" "}
-            </p>
-          </div>
+        <div className="mt-2 flex  justify-between border-t-[0.5px] border-instGrayish p-3">
+          <textarea
+            type="text"
+            placeholder="Add a comment..."
+            className="h-6 grow resize-none text-[14px] outline-none placeholder:text-[#8E8E8E]"
+            value={commentContent}
+            onChange={(e) => setCommentContent(e.target.value)}
+            ref={ref}
+          />
+          <p
+            className={`text-[14px] font-semibold text-[#0095F6] ${
+              commentContent === ""
+                ? "pointer-events-none opacity-40"
+                : "cursor-pointer opacity-100"
+            }`}
+            onClick={() => handleAddComment()}
+          >
+            {" "}
+            Post{" "}
+          </p>
         </div>
       </div>
+
       {postFullSize && (
         <PostFullSize post={post} setPostFullSize={setPostFullSize} />
       )}
-    </div>
+    </article>
   );
 };
 

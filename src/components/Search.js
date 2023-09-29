@@ -57,26 +57,26 @@ const Search = ({ setIsSearchActive }) => {
   }, [queryText, profiles]);
 
   return (
-    <div className="fixed top-[-4px] z-40 ml-[50px] hidden h-screen flex-col gap-3 rounded-tr-xl rounded-br-xl border-l-[1px] border-instGrayish bg-white shadow-lg dark:border-lightDark dark:bg-hardDark md:flex">
-      <h1 className="pl-[18px] pt-6 text-2xl font-semibold"> Search </h1>
+    <section className="fixed top-[-4px] z-40 ml-[50px] hidden h-screen w-[364px] flex-col gap-3 rounded-tr-xl rounded-br-xl border-l-[1px] border-instGrayish bg-white shadow-lg  md:flex">
+      <span className="pl-[18px] pt-6 text-2xl font-semibold"> Search </span>
       {/* Search Bar */}
-      <div className="px-4">
-        <input
-          type="search"
-          className="h-[40px] w-[364px] translate-y-7 rounded-lg bg-[#EFEFEF] py-[3px] px-4 text-base text-black outline-none dark:bg-lightDark dark:text-white"
-          placeholder="Search"
-          value={queryText}
-          onChange={(e) => {
-            setQueryText(e.target.value);
-          }}
-        />
-      </div>
+
+      <input
+        type="search"
+        className="mx-4 h-[40px] translate-y-7 rounded-lg bg-[#EFEFEF] py-[3px] px-4 text-base text-black outline-none"
+        placeholder="Search"
+        value={queryText}
+        onChange={(e) => {
+          setQueryText(e.target.value);
+        }}
+      />
 
       {/* Recent Searches */}
-      {queryText == "" && (
-        <div className="w-full translate-y-10 border-t-[1px] border-instGrayish dark:border-lightDark">
+      {queryText === "" && (
+        <div className="translate-y-10 border-t-[1px] border-instGrayish">
           <p className="px-5 py-4 font-semibold"> Recent </p>
-          <div className="flex flex-col">
+
+          <ul>
             {recentSearchList.map((search) => (
               <SearchQuery
                 key={search.searchId}
@@ -87,28 +87,26 @@ const Search = ({ setIsSearchActive }) => {
                 setIsSearchActive={setIsSearchActive}
               />
             ))}
-          </div>
+          </ul>
         </div>
       )}
 
       {/* Search Queries  */}
       {queryText !== "" && (
-        <div className="w-full translate-y-10 border-t-[1px] border-instGrayish dark:border-lightDark">
-          <div className="flex max-h-[850px] flex-col overflow-auto">
-            {filteredArray.map((searchProfile) => (
-              <SearchQuery
-                key={searchProfile.id}
-                searchName={searchProfile.profileName}
-                searchFullName={searchProfile.profileName}
-                searchImg={searchProfile.profileImgUrl}
-                setIsSearchActive={setIsSearchActive}
-                searchId={searchProfile.id}
-              />
-            ))}
-          </div>
-        </div>
+        <ul className="flex max-h-[850px] translate-y-10 flex-col overflow-auto border-t-[1px] border-instGrayish">
+          {filteredArray.map((searchProfile) => (
+            <SearchQuery
+              key={searchProfile.id}
+              searchName={searchProfile.profileName}
+              searchFullName={searchProfile.profileName}
+              searchImg={searchProfile.profileImgUrl}
+              setIsSearchActive={setIsSearchActive}
+              searchId={searchProfile.id}
+            />
+          ))}
+        </ul>
       )}
-    </div>
+    </section>
   );
 };
 

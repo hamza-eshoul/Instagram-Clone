@@ -44,38 +44,40 @@ const footerLinks = [
   },
 ];
 
-const Footer = () => {
+const Footer = ({ profileFooter }) => {
   return (
-    <div className="mb-7 flex w-screen flex-col items-center  gap-5 px-6">
+    <footer
+      className={`flex flex-col ${profileFooter} items-center gap-5 px-6 pb-8`}
+    >
       {/* Links */}
-      <div className="flex flex-wrap items-center justify-center gap-4">
+      <ul className="flex flex-wrap items-center justify-center gap-4">
         {footerLinks.map((link) => (
-          <a
-            key={link.linkName}
-            href={link.linkPath}
-            className="cursor-pointer text-[12px] text-[#8E8E8E]"
-          >
-            {link.linkName}
-          </a>
+          <li className="cursor-pointer text-[12px] text-[#8E8E8E]">
+            <a key={link.linkName} href={link.linkPath}>
+              {link.linkName}
+            </a>
+          </li>
         ))}
-      </div>
+      </ul>
 
       {/* Copyright  */}
       <div className="flex items-center justify-center gap-2">
         <div className="flex items-center justify-center">
-          <a href="" target="_blank" className="text-[12px] text-[#8E8E8E]">
-            English{" "}
-          </a>
+          <span className="text-[12px] text-[#8E8E8E]">English </span>
           <MdKeyboardArrowDown className="text-[20px] text-[#8E8E8E]" />
         </div>
 
-        <a href="" target="_blank" className="text-[12px] text-[#8E8E8E]">
+        <p className="text-[12px] text-[#8E8E8E]">
           {" "}
           © {""} 2023 Instagram from Meta{" "}
-        </a>
+        </p>
       </div>
-    </div>
+    </footer>
   );
+};
+
+Footer.defaultProps = {
+  profileFooter: "ml-0",
 };
 
 export default Footer;

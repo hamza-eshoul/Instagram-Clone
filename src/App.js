@@ -13,21 +13,15 @@ import ReelVideo from "./components/ReelVideo";
 import CreatePost from "./components/CreatePost";
 
 const App = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [isReel, setIsReel] = useState(false);
   const [isAddPost, setIsAddPost] = useState(false);
   const { user, authIsReady } = useAuthContext();
 
   return (
-    <div className={`${isDarkMode ? "dark" : ""}`}>
+    <>
       {authIsReady && (
-        <BrowserRouter basename="/">
-          <Sidebar
-            isDarkMode={isDarkMode}
-            setIsDarkMode={setIsDarkMode}
-            setIsReel={setIsReel}
-            setIsAddPost={setIsAddPost}
-          />
+        <BrowserRouter>
+          <Sidebar setIsReel={setIsReel} setIsAddPost={setIsAddPost} />
 
           {isReel && <ReelVideo setIsReel={setIsReel} />}
           {isAddPost && <CreatePost setIsAddPost={setIsAddPost} />}
@@ -59,7 +53,7 @@ const App = () => {
           </Routes>
         </BrowserRouter>
       )}
-    </div>
+    </>
   );
 };
 

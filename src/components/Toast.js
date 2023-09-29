@@ -12,7 +12,7 @@ const Toast = ({
     <>
       {toastNotification && (
         <div
-          className={`fixed bottom-1 left-[50%] mx-auto flex -translate-x-1/2 -translate-y-1/2 items-center gap-4 ${bgColor} ${textColor} border-primaryGray z-10 rounded-lg border-[1px] to-zinc-100 p-4 text-base shadow-2xl dark:border-zinc-500 dark:bg-teal-800`}
+          className={`fixed bottom-1 left-[50%] mx-auto flex -translate-x-1/2 -translate-y-1/2 items-center gap-4 ${bgColor} ${textColor} border-primaryGray z-10 rounded-lg border-[1px] to-zinc-100 p-4 text-base shadow-2xl`}
         >
           <AiOutlineInfoCircle className="hidden text-xl md:block" />
           <div>

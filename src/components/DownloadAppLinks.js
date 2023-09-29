@@ -1,7 +1,7 @@
 const DownloadAppLinks = () => {
   return (
     <div className="flex w-full flex-col items-center gap-3 border-[1px] border-instGrayish pt-2 pb-3">
-      <h1> Get the app. </h1>
+      <p> Get the app. </p>
       <div className="flex w-full justify-center gap-2">
         <a
           href="https://l.instagram.com/?u=https%3A%2F%2Fitunes.apple.com%2Fapp%2Finstagram%2Fid389801252%3Fpt%3D428156%26ct%3Digweb.loginPage.badge%26mt%3D8%26vt%3Dlo&e=AT0wQ-11T97j2VQEl_HyW8qG3MZO1CAFPtC8ZU-SMhMjSyAqb-g1ZVDyAMWMYkoLJ_jAR-Bso3-uz1HFqa8ouJDFTLEp1yOi&s=1"

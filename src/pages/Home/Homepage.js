@@ -23,21 +23,21 @@ const Homepage = ({ setIsReel }) => {
   }
 
   return (
-    <div className="mb-20 flex dark:bg-hardDark md:ml-[50px] lg:ml-[244px]">
-      <div className="mx-auto mt-10 flex max-w-7xl justify-center gap-20  dark:bg-hardDark">
+    <main className="mb-20 flex  md:ml-[50px] lg:ml-[244px]">
+      <section className="mx-auto mt-10 flex max-w-7xl justify-center gap-20  ">
         {/* Reels and Cards Section */}
         <section className="flex flex-col gap-4">
           {/* Reels */}
-          <div className="hidden h-[119px] max-w-lg items-center gap-2 rounded-xl border-[1px] border-instGrayish bg-white py-4 px-4 dark:border-[#363636] dark:bg-hardDark md:flex">
-            <Reels setIsReel={setIsReel} />
-          </div>
+
+          <Reels setIsReel={setIsReel} />
+
           {/* Cards */}
           <InstCardList posts={posts} />
         </section>
 
         <HomepageAside />
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 

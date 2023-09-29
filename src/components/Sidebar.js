@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 // images
 import defaultProfile from "../assets/images/defaultProfile.png";
@@ -20,11 +21,10 @@ import { ReactComponent as CreateSvg } from "../assets/svg/Create.svg";
 
 // components
 import Search from "./Search";
-import { useAuthContext } from "../hooks/useAuthContext";
 import SidebarMenu from "./SidebarMenu";
 import Toast from "./Toast";
 
-const Sidebar = ({ isDarkMode, setIsDarkMode, setIsReel, setIsAddPost }) => {
+const Sidebar = ({ setIsReel, setIsAddPost }) => {
   const [toastNotification, setToastNotification] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
   const { user } = useAuthContext();
@@ -42,9 +42,9 @@ const Sidebar = ({ isDarkMode, setIsDarkMode, setIsReel, setIsAddPost }) => {
   }
 
   return (
-    <div className="fixed bottom-0 z-10 flex w-full flex-col justify-between border-t-[1px] border-instGrayish bg-white pr-10 dark:border-lightDark dark:bg-black dark:text-white md:min-h-screen md:w-auto md:border-r-[1px] md:p-4 ">
+    <aside className="fixed bottom-0 z-10 flex w-full flex-col justify-between border-t-[1px] border-instGrayish bg-white md:min-h-screen md:w-auto md:border-r-[1px] md:p-4 ">
       {/* Instagram Img & Sidebar Icons */}
-      <div className="flex items-center  px-0 md:flex-col md:gap-9 md:px-0 lg:items-start">
+      <nav className="flex items-center  px-0 md:flex-col md:gap-9 md:px-0 lg:items-start">
         {/* Instagram Img */}
         <Link to="/homepage">
           {/* Insta Svg */}
@@ -68,61 +68,68 @@ const Sidebar = ({ isDarkMode, setIsDarkMode, setIsReel, setIsAddPost }) => {
 
         {/* Sidebar Icons */}
 
-        <div className="flex grow justify-around gap-2 md:flex-col">
-          <Link to="/homepage">
-            <Icon icon={<HomeSvg />} iconText={"Home"} />
-          </Link>
+        <ul className="flex grow justify-around gap-2 md:flex-col">
+          <li>
+            <Link to="/homepage">
+              <Icon icon={<HomeSvg />} iconText={"Home"} />
+            </Link>
+          </li>
 
           {/* Search Functionality */}
-          <div
+          <li
+            className="hidden md:block"
             onClick={() => {
               setIsSearchActive(!isSearchActive);
             }}
-            className="hidden md:block"
           >
             <Icon icon={<SearchSvg />} iconText={"Search"} />
-          </div>
+          </li>
 
-          <Link to="/explore">
-            <Icon icon={<ExploreSvg />} iconText={"Explore"} />
-          </Link>
+          <li>
+            <Link to="/explore">
+              <Icon icon={<ExploreSvg />} iconText={"Explore"} />
+            </Link>
+          </li>
 
-          <div onClick={() => setIsReel(true)}>
+          <li onClick={() => setIsReel(true)}>
             <Icon icon={<ReelSvg />} iconText={"Reels"} />
-          </div>
+          </li>
 
-          <div className="relative" onClick={() => toggleToastNotification()}>
+          <li onClick={() => toggleToastNotification()}>
             <Icon icon={<MessagesSvg />} iconText={"Messages"} />{" "}
-          </div>
+          </li>
 
-          <div
-            className="relative hidden md:block"
+          <li
+            className="hidden md:block"
             onClick={() => toggleToastNotification()}
           >
             <Icon icon={<NotificationsSvg />} iconText={"Notifications"} />
-          </div>
+          </li>
 
-          <div onClick={() => setIsAddPost(true)}>
+          <li onClick={() => setIsAddPost(true)}>
             <Icon icon={<CreateSvg />} iconText={"Create"} />
-          </div>
+          </li>
 
-          <Link to={`/profile/${user.displayName}`}>
-            <Icon
-              icon={
-                <div className="h-[24px] w-[24px]">
-                  {" "}
-                  <img
-                    src={user.photoURL ? user.photoURL : defaultProfile}
-                    className="rounded-xl"
-                  />
-                </div>
-              }
-              iconText={user.displayName}
-            />
-          </Link>
-        </div>
-      </div>
-      <SidebarMenu isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+          <li>
+            <Link to={`/profile/${user.displayName}`}>
+              <Icon
+                icon={
+                  <div className="h-7 w-7">
+                    <img
+                      src={user.photoURL ? user.photoURL : defaultProfile}
+                      className="h-full w-full rounded-full"
+                      alt="current user"
+                    />
+                  </div>
+                }
+                iconText={user.displayName}
+              />
+            </Link>
+          </li>
+        </ul>
+      </nav>
+
+      <SidebarMenu toggleToastNotification={toggleToastNotification} />
       {isSearchActive && <Search setIsSearchActive={setIsSearchActive} />}
 
       <Toast
@@ -131,7 +138,7 @@ const Sidebar = ({ isDarkMode, setIsDarkMode, setIsReel, setIsAddPost }) => {
         elementType={"Icon"}
         bgColor={"bg-white"}
       />
-    </div>
+    </aside>
   );
 };
 
