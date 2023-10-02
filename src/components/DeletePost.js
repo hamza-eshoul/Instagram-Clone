@@ -18,7 +18,7 @@ const DeletePost = ({ setDeletePost, post_id }) => {
         className={`fixed left-[55%] top-[50%] z-20 -translate-x-1/2 -translate-y-1/2  bg-black/50`}
       />
 
-      <div className="absolute top-[40%] left-[40%] z-50  flex w-[384px] flex-col items-center justify-center rounded-lg bg-white">
+      <div className="fixed top-[40%] left-[40%] z-50  flex w-[384px] flex-col items-center justify-center rounded-lg bg-white">
         <button
           className="flex h-[40px] w-full cursor-pointer items-center justify-center p-1 text-sm font-bold text-[#ED4956] active:bg-instGrayish"
           onClick={() => {
@@ -38,7 +38,7 @@ const DeletePost = ({ setDeletePost, post_id }) => {
       </div>
 
       {confirmDeletePost && (
-        <div className="absolute top-[35%] left-[40%] z-50 flex w-[384px] flex-col items-center justify-center rounded-lg bg-white">
+        <div className="fixed top-[35%] left-[40%] z-50 flex w-[384px] flex-col items-center justify-center rounded-lg bg-white">
           <div className="m-8 flex  flex-col items-center justify-center gap-2 ">
             <span className="text-xl"> Delete Post ?</span>
             <p className="text-sm text-[#737373]">

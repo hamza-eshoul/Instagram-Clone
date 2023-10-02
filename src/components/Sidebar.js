@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useLogout } from "../hooks/useLogout";
 
 // images
 import defaultProfile from "../assets/images/defaultProfile.png";
 
 // icons
 import Icon from "./Icons";
+import { RiLogoutCircleRLine } from "react-icons/ri";
 
 // svgs
 import { ReactComponent as InstaLogoSvg } from "../assets/svg/InstaLogo.svg";
@@ -28,6 +30,7 @@ const Sidebar = ({ setIsReel, setIsAddPost }) => {
   const [toastNotification, setToastNotification] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
   const { user } = useAuthContext();
+  const { logout } = useLogout();
 
   const toggleToastNotification = () => {
     setToastNotification(true);
@@ -95,7 +98,10 @@ const Sidebar = ({ setIsReel, setIsAddPost }) => {
             <Icon icon={<ReelSvg />} iconText={"Reels"} />
           </li>
 
-          <li onClick={() => toggleToastNotification()}>
+          <li
+            className="hidden md:block"
+            onClick={() => toggleToastNotification()}
+          >
             <Icon icon={<MessagesSvg />} iconText={"Messages"} />{" "}
           </li>
 
@@ -108,6 +114,10 @@ const Sidebar = ({ setIsReel, setIsAddPost }) => {
 
           <li onClick={() => setIsAddPost(true)}>
             <Icon icon={<CreateSvg />} iconText={"Create"} />
+          </li>
+
+          <li className="md:hidden" onClick={() => logout()}>
+            <Icon icon={<RiLogoutCircleRLine className="text-2xl" />} />
           </li>
 
           <li>
