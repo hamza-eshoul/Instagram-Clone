@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+## Instagram Clone Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![fr](https://img.shields.io/badge/lang-fr-blue)](README.fr.md)
 
-## Available Scripts
+This is the repository for the Full Stack JavaScript Final Project built for the [Odin Project](https://www.theodinproject.com/).
 
-In the project directory, you can run:
+The goal of the project was to replicate our favorite website as close as possible using the React JS framework for the frontend and the Firebase backend as a service platform for the backend.
 
-### `npm start`
+The website that I chose to replicate is the website of the social media platform Instagram.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Project's Live Preview url - https://skynter-instagram-clone.onrender.com/
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Homepage
 
-### `npm test`
+![Homepage Screenshot](/screenshots//Homepage-screenshot.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Instagram Post
 
-### `npm run build`
+![Article's Page Screenshot](/screenshots//Instagram-post-screenshot.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Mobile Version
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Mobile Version Screenshot](/screenshots/Mobile-Version%20screenshot.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Technologies Used
 
-### `npm run eject`
+- Cloud Firestore
+- Firebase Storage
+- Firebase Authentication
+- ReactJS
+- Tailwind CSS
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Key features
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Persistent Authentication using Firebase Authentication
+- Creating / Deleting Posts
+- Adding Post Comments
+- Realtime User Search Interface
+- Fully Responsive User Interface
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Installation
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To run the project locally :
 
-## Learn More
+- Access the project's root folder and run the following command to spin up a local development server :
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+npm start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Open http://localhost:3000 with your browser to access a local version of the project's client
 
-### Code Splitting
+- Most of the backend Firebase functionality is included in custom React JS hooks in the hooks folder that lives within the src folder of the project.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- The main Firebase custom hooks are the useFirestore and the useCollection hooks.
 
-### Analyzing the Bundle Size
+- The useFirestore custom hook includes reusable functions to add, update and delete documents in the Cloud Firestore database.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- The useCollection custom hook fetches all the documents of a given collection using realtime data.
