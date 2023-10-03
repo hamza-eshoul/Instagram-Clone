@@ -1,6 +1,6 @@
 const DownloadAppLinks = () => {
   return (
-    <div className="flex w-full flex-col items-center gap-3 border-[1px] border-instGrayish pt-2 pb-3">
+    <div className="hidden w-full flex-col items-center gap-3 border-[1px] border-instGrayish pt-2 pb-3 sm:flex">
       <p> Get the app. </p>
       <div className="flex w-full justify-center gap-2">
         <a
