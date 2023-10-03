@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
 import { Link } from "react-router-dom";
 
+// icons
+import { FaUser } from "react-icons/fa";
+
 // components
 import Footer from "../components/Footer";
 import PhoneMockups from "../components/PhoneMockups";
@@ -19,6 +22,13 @@ const Login = () => {
     login(email, password);
   };
 
+  const demoAccountLogin = () => {
+    login(
+      process.env.REACT_APP_DEMO_EMAIL,
+      process.env.REACT_APP_DEMO_PASSWORD
+    );
+  };
+
   return (
     <>
       <main className="authContainer">
@@ -28,7 +38,7 @@ const Login = () => {
           <section className="flex flex-col gap-3 mdl:px-6">
             {/*  Login */}
             <form
-              className="flex w-full flex-col items-center justify-center gap-5 border-[1px] border-instGrayish py-10"
+              className="flex w-full flex-col items-center justify-center gap-5 border-[1px] border-instGrayish pt-10 pb-7"
               onSubmit={handleSubmit}
             >
               <div className="h-16 w-48">
@@ -85,14 +95,24 @@ const Login = () => {
                 <div className="h-[1px] w-32 border-[0.5px] border-instGrayish"></div>
               </div>
 
-              <p className="text-center text-sm">
+              <button
+                className="flex items-center gap-2 text-[15px] font-semibold text-[#385185]"
+                type="button"
+                onClick={() => demoAccountLogin()}
+              >
+                <FaUser />
+                <span className="">Try a demo account </span>
+              </button>
+            </form>{" "}
+            <div className="flex items-center border-[1px] border-instGrayish p-4">
+              <p className="w-full text-center text-sm">
                 {" "}
                 Don't have an account ?{" "}
                 <Link to="/signup" className="font-semibold text-[#0095F6]">
                   Sign up
                 </Link>
               </p>
-            </form>{" "}
+            </div>
             <DownloadAppLinks />
           </section>
         </section>
