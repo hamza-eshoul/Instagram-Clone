@@ -4,13 +4,11 @@
 
 Ce dépôt comprend le Full Stack projet final Javascript créé pour [Odin Project](https://www.theodinproject.com/).
 
-L'objectif du projet est de reproduire au plus près notre site web préféré  en utilisant le framework React JS pour la partie frontend et la plateforme Firebase de développement d'applications mobiles et web pour la partie backend.
-
+L'objectif du projet est de reproduire au plus près notre site web préféré en utilisant le framework React JS pour la partie frontend et la plateforme Firebase de développement d'applications mobiles et web pour la partie backend.
 
 Le site Web que j’ai choisi de reproduire est le site Web de la plateforme de médias sociaux Instagram.
 
-- Lien du projet - https://odin-blog-project.onrender.com/
-
+- Lien du projet - https://skynter-instagram-clone.onrender.com/
 
 ## Page d'accueil
 

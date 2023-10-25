@@ -1,6 +1,5 @@
 import { useAuthContext } from "./useAuthContext";
 import { useFirestore } from "./useFirestore";
-import defaultProfile from "../assets/images/defaultProfile.png";
 
 export const useAddComment = () => {
   const { user } = useAuthContext();
