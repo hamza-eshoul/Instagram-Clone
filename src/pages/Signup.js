@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useSignup } from "../hooks/useSignup";
 import { Link } from "react-router-dom";
 
+// images
+import Instagram from "../assets/images/Instagram.png";
+import InstaPeople from "../assets/images/InstaPeople.png";
+
 // components
-import Footer from "../components/Footer";
-import PhoneMockups from "../components/PhoneMockups";
-import DownloadAppLinks from "../components/DownloadAppLinks";
+
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 
@@ -22,30 +24,26 @@ const Signup = () => {
 
   return (
     <>
-      {" "}
-      <main className="authContainer my-4">
-        <section className="flex">
-          <PhoneMockups />
-
-          <section className="flex flex-col gap-3 mdl:px-6">
+      <main className="authContainer">
+        <section className="flex w-full justify-center bg-[#fbfcfe] lg:bg-white">
+          <img src={InstaPeople} className="hidden w-[60%] lg:block" />
+          <section className="flex items-center justify-center lg:w-[40%]">
             {/* Sign up  */}
             <form
-              className="flex w-full flex-col items-center justify-center gap-5 border-[1px] border-instGrayish py-10"
+              className="flex w-full max-w-xl flex-col items-center justify-center gap-5 rounded bg-white px-3 py-6 shadow-md lg:shadow-none"
               onSubmit={handleSubmit}
             >
-              <div className="h-16 w-48">
+              <div>
                 {/* Insta Img */}
                 <img
-                  src={
-                    "https://firebasestorage.googleapis.com/v0/b/instagram-clone-c9891.appspot.com/o/instagram-written-logo.png?alt=media&token=932674c8-42e5-4918-b607-d324b3aa5f5f"
-                  }
+                  src={Instagram}
                   className="h-full w-full "
                   alt="instagram"
                 />
               </div>
 
-              <p className="bg-red px-8 text-center font-semibold text-[#737373]">
-                Sign up to see photos and videos from your friends.
+              <p className="-translate-y-5 px-8 text-center text-[28px] font-semibold text-[#737373]">
+                Sign up
               </p>
 
               <input
@@ -88,7 +86,7 @@ const Signup = () => {
                 <>
                   <button className="authBtn">
                     {isPending && (
-                      <Loading loadingColor={"white"} loadingSize={25} />
+                      <Loading loadingColor={"white"} loadingSize={35} />
                     )}
                     {!isPending && "Sign Up"}
                   </button>
@@ -102,7 +100,7 @@ const Signup = () => {
                 <div className="h-[1px] w-32 border-[0.5px] border-instGrayish"></div>
               </div>
 
-              <p className="text-center text-sm">
+              <p className="text-center text-lg">
                 {" "}
                 Have an account ?{" "}
                 <Link to="/login" className="font-semibold text-[#0095F6]">
@@ -110,11 +108,9 @@ const Signup = () => {
                 </Link>
               </p>
             </form>{" "}
-            <DownloadAppLinks />
           </section>
         </section>
       </main>
-      <Footer />
     </>
   );
 };

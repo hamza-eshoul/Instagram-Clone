@@ -20,15 +20,15 @@
   }
 
   .authContainer {
-    @apply mx-auto flex h-[87vh] max-w-sm items-center justify-center px-5 font-sans mdl:max-w-4xl;
+    @apply flex h-screen w-full px-5 py-4 font-sans;
   }
 
   .authInput {
-    @apply h-9 w-[80%] rounded border-[1px]  bg-[#FAFAFA] pt-[9px] pl-[8px] pb-[7px] text-sm  outline-none focus:border-zinc-400;
+    @apply w-[95%] rounded border-[1px] bg-[#FAFAFA] p-3  text-xl outline-none  focus:border-zinc-400 sm:w-[80%];
   }
 
   .authBtn {
-    @apply w-[80%] rounded-lg bg-[#0095F6] py-[7px] px-[16px] text-[14px] font-semibold text-white;
+    @apply w-[95%] rounded-lg bg-[#0095F6] py-[7px] px-[16px] text-lg font-semibold text-white sm:w-[80%];
   }
 
   .asideLink {

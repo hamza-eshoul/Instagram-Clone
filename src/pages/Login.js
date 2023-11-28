@@ -5,17 +5,21 @@ import { Link } from "react-router-dom";
 // icons
 import { FaUser } from "react-icons/fa";
 
+// images
+import Instagram from "../assets/images/Instagram.png";
+import InstaPeople from "../assets/images/InstaPeople.png";
+
 // components
-import Footer from "../components/Footer";
-import PhoneMockups from "../components/PhoneMockups";
-import DownloadAppLinks from "../components/DownloadAppLinks";
+
 import Loading from "../components/Loading";
 import Error from "../components/Error";
+import { useDemoLogin } from "../hooks/useDemoLogin";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, isPending, error } = useLogin();
+  const { demoLogin, isDemoPending, demoError } = useDemoLogin();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +27,7 @@ const Login = () => {
   };
 
   const demoAccountLogin = () => {
-    login(
+    demoLogin(
       process.env.REACT_APP_DEMO_EMAIL,
       process.env.REACT_APP_DEMO_PASSWORD
     );
@@ -32,24 +36,23 @@ const Login = () => {
   return (
     <>
       <main className="authContainer">
-        <section className="mt-10 flex">
-          <PhoneMockups />
+        <section className="flex w-full justify-center bg-[#fbfcfe] lg:bg-white">
+          <img src={InstaPeople} className="hidden w-[60%] lg:block" />
 
-          <section className="flex flex-col gap-3 mdl:px-6">
+          <section className="flex items-center justify-center lg:w-[40%]">
             {/*  Login */}
             <form
-              className="flex w-full flex-col items-center justify-center gap-5 border-[1px] border-instGrayish pt-10 pb-7"
+              className="flex w-full max-w-xl flex-col items-center justify-center gap-5 rounded bg-white px-3 py-6 shadow-md lg:shadow-none"
               onSubmit={handleSubmit}
             >
-              <div className="h-16 w-48">
+              <div>
                 {/* Insta Img */}
-                <img
-                  src={
-                    "https://firebasestorage.googleapis.com/v0/b/instagram-clone-c9891.appspot.com/o/instagram-written-logo.png?alt=media&token=932674c8-42e5-4918-b607-d324b3aa5f5f"
-                  }
-                  className="h-full w-full "
-                />
+                <img src={Instagram} className="h-full w-full " />
               </div>
+
+              <p className="-translate-y-5 px-8 text-center text-[28px] font-semibold text-[#737373]">
+                Login
+              </p>
 
               <input
                 type="email"
@@ -81,7 +84,7 @@ const Login = () => {
                 <>
                   <button className="authBtn">
                     {isPending && (
-                      <Loading loadingColor={"white"} loadingSize={25} />
+                      <Loading loadingColor={"white"} loadingSize={35} />
                     )}
                     {!isPending && "Log in"}
                   </button>
@@ -89,35 +92,41 @@ const Login = () => {
                 </>
               )}
 
+              <button
+                className="flex w-[95%] items-center  justify-center gap-2 rounded border-[1px] border-[#385185] bg-[#385185] px-[16px] py-[7px] text-lg font-semibold text-white sm:w-[80%]"
+                type="button"
+                onClick={() => demoAccountLogin()}
+              >
+                {isDemoPending && (
+                  <Loading loadingColor={"white"} loadingSize={35} />
+                )}
+                {!isDemoPending && (
+                  <>
+                    {" "}
+                    <FaUser />
+                    <span className="">Try a demo account </span>
+                  </>
+                )}
+              </button>
+              {demoError && <Error error={demoError} errorSize={"text-base"} />}
+
               <div className="flex items-center justify-center gap-4">
                 <div className="h-[1px] w-32 border-[0.5px] border-instGrayish"></div>
                 <p className="font-medium text-[#8E8E8E]"> OR </p>
                 <div className="h-[1px] w-32 border-[0.5px] border-instGrayish"></div>
               </div>
 
-              <button
-                className="flex items-center gap-2 text-[15px] font-semibold text-[#385185]"
-                type="button"
-                onClick={() => demoAccountLogin()}
-              >
-                <FaUser />
-                <span className="">Try a demo account </span>
-              </button>
-            </form>{" "}
-            <div className="flex items-center border-[1px] border-instGrayish p-4">
-              <p className="w-full text-center text-sm">
+              <p className="w-full text-center text-lg">
                 {" "}
                 Don't have an account ?{" "}
                 <Link to="/signup" className="font-semibold text-[#0095F6]">
                   Sign up
                 </Link>
               </p>
-            </div>
-            <DownloadAppLinks />
+            </form>{" "}
           </section>
         </section>
       </main>
-      <Footer />
     </>
   );
 };
