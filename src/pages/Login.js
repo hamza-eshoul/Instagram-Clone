@@ -45,8 +45,7 @@ const Login = () => {
               className="flex w-full max-w-xl flex-col items-center justify-center gap-5 rounded bg-white px-3 py-6 shadow-md lg:shadow-none"
               onSubmit={handleSubmit}
             >
-              <div>
-                {/* Insta Img */}
+              <div className="w-[70%]">
                 <img src={Instagram} className="h-full w-full " />
               </div>
 
@@ -54,25 +53,29 @@ const Login = () => {
                 Login
               </p>
 
-              <input
-                type="email"
-                placeholder="Email"
-                className="authInput"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              />
+              <label className="auth_label">
+                <span className="auth_label_text">Email address</span>
+                <input
+                  type="email"
+                  className="authInput"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                />
+              </label>
 
-              <input
-                type="password"
-                placeholder="Password"
-                className="authInput"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
+              <label className="auth_label">
+                <span className="auth_label_text">Password</span>
+                <input
+                  type="password"
+                  className="authInput"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                />
+              </label>
 
               {(email == "" || password == "") && (
                 <button className="authBtn pointer-events-none opacity-60">
@@ -93,7 +96,7 @@ const Login = () => {
               )}
 
               <button
-                className="flex w-[95%] items-center  justify-center gap-2 rounded border-[1px] border-[#385185] bg-[#385185] px-[16px] py-[7px] text-lg font-semibold text-white sm:w-[80%]"
+                className="flex w-[95%] items-center justify-center gap-2 rounded border-[1px] border-[#385185] bg-[#385185] px-[16px] py-[8px] font-semibold text-white sm:w-[80%]"
                 type="button"
                 onClick={() => demoAccountLogin()}
               >
@@ -104,7 +107,7 @@ const Login = () => {
                   <>
                     {" "}
                     <FaUser />
-                    <span className="">Try a demo account </span>
+                    <span>Try a demo account </span>
                   </>
                 )}
               </button>
@@ -116,7 +119,7 @@ const Login = () => {
                 <div className="h-[1px] w-32 border-[0.5px] border-instGrayish"></div>
               </div>
 
-              <p className="w-full text-center text-lg">
+              <p className="w-full text-center">
                 {" "}
                 Don't have an account ?{" "}
                 <Link to="/signup" className="font-semibold text-[#0095F6]">

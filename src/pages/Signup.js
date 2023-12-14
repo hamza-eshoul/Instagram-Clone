@@ -33,8 +33,7 @@ const Signup = () => {
               className="flex w-full max-w-xl flex-col items-center justify-center gap-5 rounded bg-white px-3 py-6 shadow-md lg:shadow-none"
               onSubmit={handleSubmit}
             >
-              <div>
-                {/* Insta Img */}
+              <div className="w-[70%]">
                 <img
                   src={Instagram}
                   className="h-full w-full "
@@ -46,35 +45,41 @@ const Signup = () => {
                 Sign up
               </p>
 
-              <input
-                type="email"
-                placeholder="Email"
-                className="authInput"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              />
+              <label className="auth_label">
+                <span className="auth_label_text">Email address</span>
+                <input
+                  type="email"
+                  className="authInput"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                />
+              </label>
 
-              <input
-                type="text"
-                placeholder="Username"
-                className="authInput"
-                value={username}
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
-              />
+              <label className="auth_label">
+                <span className="auth_label_text">Username</span>
+                <input
+                  type="text"
+                  className="authInput"
+                  value={username}
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                  }}
+                />
+              </label>
 
-              <input
-                type="password"
-                placeholder="Password"
-                className="authInput"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
+              <label className="auth_label">
+                <span className="auth_label_text">Password</span>
+                <input
+                  type="password"
+                  className="authInput"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                />
+              </label>
 
               {(email === "" || username === "" || password === "") && (
                 <button className="authBtn pointer-events-none opacity-60">
@@ -100,7 +105,7 @@ const Signup = () => {
                 <div className="h-[1px] w-32 border-[0.5px] border-instGrayish"></div>
               </div>
 
-              <p className="text-center text-lg">
+              <p className="text-center">
                 {" "}
                 Have an account ?{" "}
                 <Link to="/login" className="font-semibold text-[#0095F6]">
